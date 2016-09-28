@@ -1,0 +1,30 @@
+#!/bin/bash
+
+NAME="joeyliu"
+WEBAPPDIR=/srv/webapps/joeyliu/deploy/dev/bin
+DJANGODIR=/srv/webapps/joeyliu/joeyliu
+DEPLOYDIR=/srv/webapps/joeyliu/deploy
+SOCKFILE=/srv/webapps/joeyliu/deploy/run/gunicorn_joeyliu.sock
+USER=webapps
+GROUP=webapps
+NUM_WORKERS=3
+DJANGO_SETTINGS_MODULE=project.settings.prod
+DJANGO_WSGI_MODULE=project.wsgi
+
+echo "String $NAME as `whoami`"
+
+cd $DEPLOYDIR
+source env/bin/activate
+export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
+export PYTHONPATH=$DJANGODIR:$PYTHONPATH
+
+RUNDIR=$(dirname $SOCKFILE)
+test -d $RUNDIR || mkdir -p $RUNDIR
+
+exec ${DEPLOYDIR}/env/bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
+    --name $NAME \
+    --workers $NUM_WORKERS \
+    --user=$USER  --group=$GROUP \
+    --bind=unix:$SOCKFILE \
+    --log-level=debug \
+    --log-file=-
