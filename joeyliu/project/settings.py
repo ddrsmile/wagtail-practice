@@ -164,7 +164,7 @@ DATABASES = {
 #########
 
 # Full filesystem path to the project.
-PROJECT_APP_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_APP_PATH = os.path.dirname(os.path.abspath(__file__))
 PROJECT_APP = os.path.basename(PROJECT_APP_PATH)
 PROJECT_ROOT = BASE_DIR = os.path.dirname(PROJECT_APP_PATH)
 
@@ -293,7 +293,7 @@ OPTIONAL_APPS = (
 # local_settings has full access to everything defined in this module.
 # Also force into sys.modules so it's visible to Django's autoreload.
 
-f = os.path.join(PROJECT_APP_PATH, "settings", "local.py")
+f = os.path.join(PROJECT_APP_PATH, "local.py")
 if os.path.exists(f):
     import sys
     import imp
