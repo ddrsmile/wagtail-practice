@@ -8,7 +8,7 @@ SOCKFILE=/Users/Joey/webapps/joeyliu/deploy/run/gunicorn_joeyliu.sock
 USER=Joey
 GROUP=staff
 NUM_WORKERS=3
-DJANGO_SETTINGS_MODULE=project.settings.dev
+DJANGO_SETTINGS_MODULE=project.settings.settings
 DJANGO_WSGI_MODULE=project.wsgi
 
 echo "String $NAME as `whoami`"
