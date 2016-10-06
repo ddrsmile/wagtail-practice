@@ -174,8 +174,8 @@ PROJECT_ROOT = BASE_DIR = os.path.dirname(PROJECT_APP_PATH)
 CACHE_MIDDLEWARE_KEY_PREFIX = PROJECT_APP
 
 # URL prefix for static files.
-STATIC_URL = "https://joeyliu-webapps.s3.amazonaws.com/joeyliu/static/"
-MEDIA_URL = "https://joeyliu-webapps.s3.amazonaws.com/joeyliu/media/"
+# using s3 as the storage of static and media files
+from .s3.storage import *
 
 # Package/module name to import the root urlpatterns from for the project.
 ROOT_URLCONF = "%s.urls" % PROJECT_APP
@@ -233,6 +233,7 @@ INSTALLED_APPS = (
     "mezzanine.forms",
     "mezzanine.galleries",
     "mezzanine.twitter",
+    "storages",
     # "mezzanine.accounts",
     # "mezzanine.mobile",
 )
@@ -302,8 +303,6 @@ if os.path.exists(f):
     module.__file__ = f
     sys.modules[module_name] = module
     exec(open(f, "rb").read())
-
-
 
 ####################
 # DYNAMIC SETTINGS #
