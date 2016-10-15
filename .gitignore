@@ -1,4 +1,10 @@
+.DS_Store
 env/
 __pycache__/
 *.log
-joeyliu/deploy
+*.pyc
+*.sock
+*SECRET_KEY*
+dev.py
+joeyliu/static/*
+joeyliu/media/*
