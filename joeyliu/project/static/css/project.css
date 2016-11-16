@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+body {
+    width: 100%;
+    max-width: 1024px;
+    font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+    margin: 0 auto;
+}
+.logo-name h1 {
+    font-size: 40px;
+    color: #CD9B1D;
+    font-family: 'Ubuntu', sans-serif;
+}
+img#bkgd {
+    min-height: 100%;
+    min-width: 1024px;
+    width: 100%;
+    height:auto;
+    position:fixed;
+    top:0;
+    left:0;
+    z-index: -1;
+}
+.navbar-table {
+    width: 100%;
+    text-align: center;
+    margin: 50px auto;
+}
+.navbar-table td {
+    width: 20%;
+    border-bottom: 1px solid rgba(0,0,0,0);
+}
+a,
+a:visited,
+a:hover,
+a:active {
+    text-decoration: none;
+}
+.navbar-table td a,
+.navbar-table td a:visited {
+    color: #CD9B1D;
+    font-size: 18px;
+}
+.navbar-table td a:hover,
+.navbar-table td a:active {
+    color: #523E0B;
+}
+.td-hover {
+    border-bottom-color: rgba(205,155,29,0.75) !important;
+}
+.navbar-table td a,
+.navbar-table td {
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    transition:.5s;
+}
+
+@media screen and (max-width: 1024px) {
+    img#bkgd {
+        left: 50%;
+        margin-left: -512px;
+    }
+}

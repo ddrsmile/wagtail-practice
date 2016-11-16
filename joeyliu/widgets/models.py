@@ -5,7 +5,6 @@ from django.db import models
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
-
 # Carousel items
 class CarouselItem(models.Model):
     image = models.ForeignKey(

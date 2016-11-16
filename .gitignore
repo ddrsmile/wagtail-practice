@@ -8,3 +8,4 @@ __pycache__/
 dev.py
 joeyliu/static/*
 joeyliu/media/*
+.vscode/
