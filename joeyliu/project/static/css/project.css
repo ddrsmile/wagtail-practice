@@ -30,20 +30,15 @@ img#bkgd {
     width: 20%;
     border-bottom: 1px solid rgba(0,0,0,0);
 }
-a,
-a:visited,
-a:hover,
-a:active {
-    text-decoration: none;
+a, a:hover, a:active, a:visited {
+    text-decoration:none !important;
 }
 .navbar-table td a,
-.navbar-table td a:visited {
+.navbar-table td a:hover,
+.navbar-table td a:visited,
+.navbar-table td a:active {
     color: #CD9B1D;
     font-size: 18px;
-}
-.navbar-table td a:hover,
-.navbar-table td a:active {
-    color: #523E0B;
 }
 .td-hover {
     border-bottom-color: rgba(205,155,29,0.75) !important;
