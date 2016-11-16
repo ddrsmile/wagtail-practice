@@ -8,11 +8,13 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_suffix %}{% endblock %}</title>
+        <title>{% block title %}Joey LIU | NANTSOU{% endblock %}{% block title_suffix %}{% endblock %}</title>
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {# Global stylesheets #}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/slider-pro.min.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/project.css' %}">
 
         {% block extra_css %}
@@ -21,11 +23,14 @@
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
-        {% wagtailuserbar %}
-
+        <img id="bkgd" src={% static 'img/background.png' %}>
+        <div class="logo-name"><a href="/"><h1>Joey Liu | NANTSOU</h1></a></div>
+        {% include 'includes/_navibar.html' %}
         {% block content %}{% endblock %}
 
         {# Global javascript #}
+        <script type="text/javascript" src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/project.js' %}"></script>
 
         {% block extra_js %}

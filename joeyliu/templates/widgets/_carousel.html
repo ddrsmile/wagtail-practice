@@ -1,0 +1,14 @@
+{% load static wagtailimages_tags wagtailembeds_tags %}
+
+{% if carousel_items %}
+<div id="carousel" class="slider-pro">
+    <div class="sp-slides">
+        {% for carousel_item in carousel_items %}
+        {% image carousel_item.image width-1000 as carouselimagedata %}
+        <div class="sp-slide">
+            <img class="sp-image" src="{{ carouselimagedata.url  }}"/>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}

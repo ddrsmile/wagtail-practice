@@ -5,7 +5,7 @@ from django.db import models
 from modelcluster.fields import ParentalKey
 
 # customized widget models
-from widget.models import CarouselItem
+from widgets.models import CarouselItem
 
 # wagtail models
 from wagtail.wagtailcore.models import Page, Orderable
