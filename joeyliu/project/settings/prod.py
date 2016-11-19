@@ -16,8 +16,10 @@ import csv
 AWS_PEM = csv.reader(open('/usr/local/etc/aws_credentials.csv'), delimiter=',')
 AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY = next(AWS_PEM)
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.10/howto/static-files/
+AWS_HEADERS = {
+    'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+    'Cache-Control': 'max-age=94608000',
+}
 
 AWS_STORAGE_BUCKET_NAME = 'joeyliu-webapps'
 AWS_S3_CUSTOM_DOMAIN = '{0}.s3.amazonaws.com'.format(AWS_STORAGE_BUCKET_NAME)
