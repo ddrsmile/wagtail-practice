@@ -8,21 +8,21 @@ from modelcluster.fields import ParentalKey
 
 # wagtail models
 from wagtail.wagtailcore.models import Page, Orderable
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel
 from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
+from wagtail.wagtailcore.fields import StreamField
+from wagtail.wagtailcore import blocks
 
 class HomePage(RoutablePageMixin, Page):
     
+    """
+    carousel = StreamField([
+        ('carousel',blocks.ListBlock(ImageCarouselBlock(), template="blocks/_carousel.html", icon='image')),
+    ])
+    """
+
     @route(r'^$')
     def home(self, request):
-        return TemplateResponse(
-            request,
-            self.get_template(request),
-            self.get_context(request)
-        )
-    
-    @route(r'^bolg/$')
-    def blog(self, request):
         return TemplateResponse(
             request,
             self.get_template(request),

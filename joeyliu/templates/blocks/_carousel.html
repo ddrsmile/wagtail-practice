@@ -1,0 +1,75 @@
+{% load static wagtailimages_tags wagtailembeds_tags %}
+
+<div id="{{ self.carousel_title }}" class="slider-pro">
+    <div class="sp-slides">
+        {% for item in self.images %}
+        {% image item.image width-1000 as carouselimagedata %}
+        <div class="sp-slide">
+            <img class="sp-image" src="{{ carouselimagedata.url  }}"/>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<script>
+carousel_{{ self.carousel_title }} = function() {
+        $('#{{ self.carousel_title }}').sliderPro({
+            width: 1200,
+            height: 400,
+            {% if self.arrow %}
+                arrows: true,
+            {% else %}
+                arrows: false,
+            {% endif %}
+            {% if self.button %}
+                buttons: true,
+            {% else %}
+                buttons: false,
+            {% endif %}
+            slideDistance:0,
+        });
+}
+</script>
+
+<!--
+<div id="carousel-{{ self.carousel_title }}" class="carousel slide" data-ride="carousel">
+
+
+  <ol class="carousel-indicators">
+    {% for item in self.images %}
+    {% if forloop.counter0 == 0 %}
+        <li data-target="#carousel-{{ self.carousel_title }}" data-slide-to="{{ forloop.counter0 }}" class="active"></li>
+    {% else %}
+        <li data-target="#carousel-{{ self.carousel_title }}" data-slide-to="{{ forloop.counter0 }}"></li>
+    {% endif %}
+    {% endfor %}
+  </ol>
+
+  
+  <div class="carousel-inner" role="listbox">
+    {% for item in self.images %}
+    {% image item.image width-1000 as imagedata %}
+    {% if forloop.counter0 == 0 %}
+    <div class="item active">
+    {% else %}
+    <div class="item">
+    {% endif %}
+      <img src="{{ imagedata.url  }}">
+    </div>
+    {% endfor %}
+  </div>
+
+  
+  <a class="left carousel-control" href="#carousel-{{ self.carousel_title }}" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-{{ self.carousel_title }}" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+<script>
+    var {{ self.carousel_title }} = 0;
+</script>
+-->
