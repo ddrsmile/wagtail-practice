@@ -1,2 +1,2 @@
-# joeyliu
-It is my personal websites.
+# Wagtail Practice
+I use this website to practice wagtail cms.
