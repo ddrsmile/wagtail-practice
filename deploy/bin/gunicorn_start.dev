@@ -1,20 +1,20 @@
 #!/bin/bash
 
-NAME="joeyliu"
-WEBAPPDIR=/Users/Joey/webapps/joeyliu/deploy/dev/bin
-DJANGODIR=/Users/Joey/webapps/joeyliu/joeyliu
-DEPLOYDIR=/Users/Joey/webapps/joeyliu/deploy
-SOCKFILE=/Users/Joey/webapps/joeyliu/deploy/run/gunicorn_joeyliu.sock
+NAME=joeyliu
+ROOT=/Users/Joey/webapps/${NAME}
+BINDIR=${ROOT}/deploy/dev/bin
+DJANGODIR=${ROOT}/src
+DEPLOYDIR=${ROOT}/deploy
+SOCKFILE=${DEPLOYDIR}/run/gunicorn_${NAME}.sock
 USER=Joey
 GROUP=staff
 NUM_WORKERS=3
 DJANGO_SETTINGS_MODULE=project.settings.dev
 DJANGO_WSGI_MODULE=project.wsgi
 
-echo "String $NAME as `whoami`"
 
 cd $DEPLOYDIR
-source env/bin/activate
+source ${DEPLOYDIR}/env/bin/activate
 export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
 export PYTHONPATH=$DJANGODIR:$PYTHONPATH
 
