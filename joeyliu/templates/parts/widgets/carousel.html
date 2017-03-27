@@ -1,0 +1,31 @@
+{% load static wagtailimages_tags wagtailembeds_tags %}
+
+<div id="{{ self.carousel_title }}" class="slider-pro">
+    <div class="sp-slides">
+        {% for item in self.images %}
+        {% image item.image width-1000 as carouselimagedata %}
+        <div class="sp-slide">
+            <img class="sp-image" src="{{ carouselimagedata.url  }}"/>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<script>
+carousel_{{ self.carousel_title }} = function() {
+        $('#{{ self.carousel_title }}').sliderPro({
+            width: 1200,
+            height: 400,
+            {% if self.arrow %}
+                arrows: true,
+            {% else %}
+                arrows: false,
+            {% endif %}
+            {% if self.button %}
+                buttons: true,
+            {% else %}
+                buttons: false,
+            {% endif %}
+            slideDistance:0,
+        });
+}
+</script>

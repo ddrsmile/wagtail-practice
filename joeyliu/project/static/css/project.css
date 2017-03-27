@@ -6,15 +6,24 @@
   src: local('Ubuntu'), url(../font/ubuntu_font.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
 }
+html {
+    font-size: 20px;
+}
 body {
     width: 100%;
     max-width: 1024px;
-    font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    color: #1B1B1B;
+    font-size: 0.8rem;
+    line-height: 1.5;
     margin: 0 auto;
 }
-.logo-name h1 {
-    font-size: 40px;
+h1, h2, h3, h4, h5, h6, #navbar, .navbar-table, .paginator {
+    font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
     color: #CD9B1D;
+}
+.logo-name h1 {
+    font-size: 2rem;
     font-family: 'Ubuntu', sans-serif;
 }
 img#bkgd {
@@ -27,14 +36,15 @@ img#bkgd {
     left:0;
     z-index: -1;
 }
+/* NAVI-TABLE */
 .navbar-table {
     width: 100%;
     text-align: center;
-    margin: 50px auto;
+    margin: 2.5rem auto;
 }
 .navbar-table td {
     width: 20%;
-    border-bottom: 1px solid rgba(0,0,0,0);
+    border-bottom: 0.05rem solid rgba(0,0,0,0);
 }
 a, a:hover, a:active, a:visited {
     text-decoration:none !important;
@@ -44,7 +54,7 @@ a, a:hover, a:active, a:visited {
 .navbar-table td a:visited,
 .navbar-table td a:active {
     color: #CD9B1D;
-    font-size: 18px;
+    font-size: 0.9rem;
 }
 .td-hover {
     border-bottom-color: rgba(205,155,29,0.75) !important;
@@ -58,6 +68,61 @@ a, a:hover, a:active, a:visited {
     transition:.5s;
 }
 
+/* NAVI-BAR */
+.navbar-brand {
+    font-size: 2rem;
+    font-family: 'Ubuntu', sans-serif;
+    color: #CD9B1D;
+}
+.navbar-toggle,
+.navbar-toggle:hover {
+    border: none;
+    background: transparent !important;
+}
+.navbar-toggle .icon-bar {
+    width: 22px;
+    background-color: #CD9B1D !important;
+    transition: all 0.2s;
+}
+.navbar-toggle .top-bar {
+    transform: rotate(45deg);
+    transform-origin: 10% 10%;
+}
+.navbar-toggle .middle-bar {
+    opacity: 0;
+}
+.navbar-toggle .bottom-bar {
+    transform: rotate(-45deg);
+    transform-origin: 10% 90%;
+}
+.navbar-toggle.collapsed .top-bar,
+.navbar-toggle.collapsed .bottom-bar {
+    transform: rotate(0);
+}
+.navbar-toggle.collapsed .middle-bar {
+    opacity: 1;
+}
+#navbar>ul.nav.navbar-nav>li>a {
+    font-size: 1rem;
+    color: #CD9B1D;
+}
+/* CUSTOMIZE RESPONSIVE */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    html {
+        font-size: 12px;
+    }
+}
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+    html {
+        font-size: 16px;
+    }
+}
 @media screen and (max-width: 1024px) {
     img#bkgd {
         left: 50%;

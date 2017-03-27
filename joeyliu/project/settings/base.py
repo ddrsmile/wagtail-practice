@@ -30,11 +30,6 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
-    'home',
-    'blog',
-    'search',
-    'blocks',
-
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',
     'wagtail.wagtailembeds',
@@ -56,6 +51,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'blog',
+    'search',
+    'parts',
 ]
 
 MIDDLEWARE = [
@@ -95,8 +94,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'project.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 import csv
 DB_INFO = csv.reader(open('/usr/local/etc/dbinfo.csv'), delimiter=',')
 DB_INFO = next(DB_INFO)

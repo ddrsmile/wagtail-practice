@@ -1,12 +1,87 @@
 {% extends "base.html" %}
 {% load static wagtailcore_tags wagtailimages_tags %}
 
+{% block heading %}
+<style text="text/css">
+    .tag-list ul {
+        margin-top: -0.8rem;
+        margin-bottom: 1rem;
+        padding: 0;
+    }
+    .tag-list ul li {
+        display: inline;
+        color: #767676;
+        font-weight: 600;
+    }
+    .tag-list ul li+li {
+        margin: 0 0.3rem;
+    }
+    .tag-list ul li a {
+        color: #767676;
+    }
+    .tag-list ul li a:hover {
+        color: #CD9B1D;
+    }
+</style>
+<div class="page-header">
+
+    <h2>
+        {{ self.title }}
+        {% if self.date %}<small>{{ self.date }}</small>{% endif %}
+    </h2>
+
+</div>
+<div class="tag-list">
+    <ul>
+        <li class="tag-label">Tags:</li>
+        {% for tag in self.tags.all %}
+        <li>
+            <a href="{% pageurl self.blog_index %}?tag={{ tag }}" class="">
+                {{ tag }}
+            </a>
+        </li>
+        {% empty %}
+            <li class="tag-notfound">tags not found!!</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+
 {% block content %}
+    <style text="text/css">
+    .body-content {
+        background: #F5F5F5;
+        padding: 1rem 1.25rem;
+        border-radius: 0.2rem;
+        margin-bottom: 2.5rem;
+        
+    }
+    @media only screen 
+    and (max-width: 1024px) {
+        .body-content {
+            border-radius: 0;
+        }
+    }
+    </style>
+    <link rel="stylesheet" href="{% static 'css/code_hightlight.css' %}">
+    <div class="body-content">
+        {% if self.body %}
+            {% include "blog/includes/stream_fields.html" with content=self.body %}
+        {% endif %}
+    </div>
+    <script src="{% static 'js/highlight.pack.js' %}"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+{% endblock %}
+<!--
+
 <link rel="stylesheet" type="text/css" href="{% static 'css/slider-pro.min.css' %}">
 <link rel="stylesheet" href="{% static 'css/default.css' %}">
 <script>
     var carousel_list = [];
 </script>
+<div class="page-header">
+    <h1>{{ self.title }}</h1>
+</div>
 <div class="main-content-box">
     {% for block in self.body %}
     <div>
@@ -18,8 +93,7 @@
     </div>
     {% endfor %}
 </div>
-{% endblock %}
-{% block extra_js %}
+
 <script type="text/javascript" src="{% static 'js/jquery.sliderPro.min.js' %}"></script>
 <script>
 $(document).ready(function(){
@@ -30,4 +104,5 @@ $(document).ready(function(){
 </script>
 <script src="{% static 'js/highlight.pack.js' %}"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-{% endblock %}
+
+-->

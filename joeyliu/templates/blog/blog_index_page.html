@@ -2,24 +2,31 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/slider-pro.min.css' %}">
-<link rel="stylesheet" href="{% static 'css/default.css' %}">
+<style>
+    a.list-group-item:not(:last-child) {
+        margin-bottom: 0.5rem;
+    }
+    a.list-group-item img {
+        width: 10rem;
+        height: 7.5rem;
+        overflow: hidden;
+    }
+    @media only screen 
+    and (max-width: 1024px) {
+        .list-group-item:first-child,
+        .list-group-item:last-child {
+            border-radius: 0;
+        }
+    }
+</style>
 
 <div class="main-content-box">
-    {% for block in self.body %}
-    <div>
-        {% include_block block %}
-    </div>
-    {% endfor %}
+    {% if blogs %}
+        {% for blog in blogs %}
+            {% include "blog/includes/blog_list_item.html" %}
+        {% empty %}
+            No blogs fund
+        {% endfor %}
+    {% endif %}
 </div>
-{% endblock %}
-{% block extra_js %}
-<script type="text/javascript" src="{% static 'js/jquery.sliderPro.min.js' %}"></script>
-<script>
-$(document).ready(function(){
-    carousel_KKK();
-});
-</script>
-<script src="{% static 'js/highlight.pack.js' %}"></script>
-<script>hljs.initHighlightingOnLoad();</script>
 {% endblock %}

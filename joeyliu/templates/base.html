@@ -23,8 +23,11 @@
 
     <body class="{% block body_class %}{% endblock %}">
         <img id="bkgd" src={% static 'img/background.jpg' %}>
-        <div class="logo-name"><a href="/"><h1>Joey Liu | NANTSOU</h1></a></div>
+        <div class="logo-name hidden-xs"><a href="/"><h1>Joey Liu | NANTSOU</h1></a></div>
         {% include 'includes/_navibar.html' %}
+
+        {% block heading %}{% endblock %}
+
         {% block content %}{% endblock %}
 
         {# Global javascript #}
