@@ -45,8 +45,8 @@ class CodeBlock(StructBlock):
         formatter = get_formatter_by_name(
             'html',
             linenos=None,
-            cssclass='code-hightlight',
-            style='tango',
+            cssclass='codehilite',
+            style='github',
             noclasses=False,
         )
         return mark_safe(highlight(src, lexer, formatter))
