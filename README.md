@@ -1,2 +1,2 @@
-# Wagtail Practice
-I use this website to practice wagtail cms.
+# Joeyliu 
+It is my personal website which I practice wagtail cms with.
