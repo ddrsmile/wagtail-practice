@@ -13,7 +13,7 @@ from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailsearch import index
 # customization
 from parts.blocks import BlogStreamBlock
-from parts.widgets import RelatedLink, CarouselItem
+from parts.fields import RelatedLink, CarouselItem
 from modelcluster.fields import ParentalKey
 from modelcluster.tags import ClusterTaggableManager
 from taggit.models import TaggedItemBase

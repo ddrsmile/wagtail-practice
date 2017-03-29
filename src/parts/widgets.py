@@ -1,79 +1,81 @@
 from __future__ import absolute_import, unicode_literals
 # django
-from django.db import models
+from django.forms import Media, widgets
+from django.contrib.staticfiles.templatetags.staticfiles import static
 # wagtail
-from wagtail.wagtailadmin.edit_handlers import (FieldPanel, 
-                                                FieldRowPanel, 
-                                                MultiFieldPanel, 
-                                                InlinePanel, 
-                                                PageChooserPanel, 
-                                                StreamFieldPanel)
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
+from wagtail.utils.widgets import WidgetWithScript
 
-class LinkFields(models.Model):
-    link_external = models.URLField("External link", blank=True)
-    link_page = models.ForeignKey(
-        'wagtailcore.Page',
-        null=True,
-        blank=True,
-        related_name='+'
-    )
-    link_document = models.ForeignKey(
-        'wagtaildocs.Document',
-        null=True,
-        blank=True,
-        related_name='+'
-    )
+def git_id_num(id):
+    words = id.split('-')
+    for word in words:
+        try:
+            int(word)
+            return str(word)
+        except ValueError:
+            pass
+    return None
 
+import logging
+class CodeTextWidget(WidgetWithScript, widgets.Textarea):
+    def render_js_init(self, id_, name, value):
+        # default mode is set to python
+        logging.info(id_)
+        jsinit = """
+            code_editor_{suffix!s} = CodeMirror.fromTextArea(
+                document.getElementById("{id!s}"),
+                {{
+                    mode: "python",
+                    theme: "solarized light",
+                    lineNumbers: true,
+                    styleActiveLine: true,
+                    matchBrackets: true,
+                    extraKeys: {{
+                        "Tab": function(cm){{
+                            cm.replaceSelection("    " , "end");
+                        }}
+                    }}
+                }}
+            )
+        """
+        return jsinit.format(suffix=git_id_num(name), id=id_)
+    
+    #@property
+    #def media(self):
+    #    js = [
+    #        static('js/codemirror/lib/codemirror.js'),
+    #        static('js/codemirror/mode/python.js'),
+    #        static('js/codemirror/mode/clike.js'),
+    #    ]
+    #    css = {
+    #        'all': [
+    #            static('css/codemirror/lib/codemirror.css'),
+    #            static('css/codemirror/theme/eclipse.css'),
+    #    ]}
+    #    return Media(js=js, css=css)
+
+class MarkDownWidget(WidgetWithScript, widgets.Textarea):
+
+    def render_js_init(self, id_, name, value):
+        jsinit = """
+            if (window.SimpleMDEInstances == null) {{
+                window.SimpleMDEInstances = [];
+            }}
+            sm = new SimpleMDE({{
+                element: document.getElementById("{id!s}"),
+                forceSync: true,
+                spellChecker: false
+            }})
+            window.SimpleMDEInstances.push(sm);
+        """
+        return jsinit.format(id=id_)
+    
     @property
-    def link(self):
-        if self.link_page:
-            return self.link_page.url
-        elif self.link_document:
-            return self.link_document.url
-        else:
-            return self.link_external
-
-    panels = [
-        FieldPanel('link_external'),
-        PageChooserPanel('link_page'),
-        DocumentChooserPanel('link_document'),
-    ]
-
-    class Meta:
-        abstract = True
-
-# related links
-class RelatedLink(LinkFields):
-    title = models.CharField(max_length=255, help_text="Link title")
-
-    panels = [
-        FieldPanel('title'),
-        MultiFieldPanel(LinkFields.panels, "Link"),
-    ]
-
-    class Meta:
-        abstract = True
-
-# carousel
-class CarouselItem(LinkFields):
-    image = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-    embed_url = models.URLField("Embed URL", blank=True)
-    caption = models.CharField(max_length=255, blank=True)
-
-    panels = [
-        ImageChooserPanel('image'),
-        FieldPanel('embed_url'),
-        FieldPanel('caption'),
-        MultiFieldPanel(LinkFields.panels, "Link"),
-    ]
-
-    class Meta:
-        abstract = True
+    def media(self):
+        js = [
+            static('parts/simplemde/simplemde.min.js'),
+        ]
+        css = {
+            'all': [
+                static('parts/simplemde/simplemde.min.css'),
+        ]}
+        return Media(js=js, css=css)
