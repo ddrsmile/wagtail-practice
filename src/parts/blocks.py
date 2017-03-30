@@ -36,18 +36,13 @@ LANGUAGES = (
 )
 
 class CodeChoiceBlock(ChoiceBlock):
-    def __init__(self, choices=None, default=None, required=True, help_text=None, **kwargs):
-        
-        super(CodeChoiceBlock, self).__init__(choices=choices, default=default, required=required, help_text=help_text, **kwargs)
+    def __init__(self, choices=None, default=None, required=True, help_text=None, **kwargs): 
+        super(CodeChoiceBlock, self).__init__(choices=choices, 
+                                              default=default, 
+                                              required=required, 
+                                              help_text=help_text, 
+                                              **kwargs)
         self.field.widget.attrs.update({'onchange': 'update_mode(this)'})
-    
-    
-    #@cached_property
-    #def field(self):
-    #    field_kwargs = {
-    #        'widget': forms.Select(attrs={'onchange': 'alert("abc");'}),
-    #    }
-    #    return forms.ChoiceField(**field_kwargs)
 
 class CodeTextBlock(TextBlock):
     @cached_property
@@ -59,7 +54,6 @@ class CodeTextBlock(TextBlock):
         return forms.CharField(**field_kwargs)
 
 class CodeBlock(StructBlock):
-    #language = ChoiceBlock(choices=LANGUAGES, blank=False, null=False, default='python', widget = forms.Select(attrs={'onchange': 'alert("abc");'}))
     language = CodeChoiceBlock(choices=LANGUAGES, blank=False, null=False, default='python')
     code = CodeTextBlock()
 

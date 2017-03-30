@@ -29,6 +29,7 @@ class CodeTextWidget(WidgetWithScript, widgets.Textarea):
                     lineNumbers: true,
                     styleActiveLine: true,
                     matchBrackets: true,
+                    indentUnit: 4,
                     extraKeys: {{
                         "Tab": function(cm){{
                             cm.replaceSelection("    " , "end");
@@ -39,19 +40,23 @@ class CodeTextWidget(WidgetWithScript, widgets.Textarea):
         """
         return jsinit.format(suffix=git_id_num(name), id=id_)
     
-    #@property
-    #def media(self):
-    #    js = [
-    #        static('js/codemirror/lib/codemirror.js'),
-    #        static('js/codemirror/mode/python.js'),
-    #        static('js/codemirror/mode/clike.js'),
-    #    ]
-    #    css = {
-    #        'all': [
-    #            static('css/codemirror/lib/codemirror.css'),
-    #            static('css/codemirror/theme/eclipse.css'),
-    #    ]}
-    #    return Media(js=js, css=css)
+    @property
+    def media(self):
+        js = [
+            static('parts/codemirror/lib/codemirror.js'),
+            static('parts/codemirror/lib/utils.js'),
+            static('parts/codemirror/mode/python.js'),
+            static('parts/codemirror/mode/clike.js'),
+            static('parts/codemirror/mode/javascript.js'),
+            static('parts/codemirror/mode/css.js'),
+            static('parts/codemirror/mode/shell.js'),
+        ]
+        css = {
+            'all': [
+                static('parts/codemirror/lib/codemirror.css'),
+                static('parts/codemirror/theme/solarized.css'),
+        ]}
+        return Media(js=js, css=css)
 
 class MarkDownWidget(WidgetWithScript, widgets.Textarea):
 

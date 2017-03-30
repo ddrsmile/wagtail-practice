@@ -11,8 +11,11 @@ var codemapper = {
 
 function update_mode(obj) {
     var choice_id = obj.id;
+    var textarea_id = choice_id.replace("language", "code");
+    var textarea = document.getElementById(textarea_id);
     var id_num = choice_id.split("-")[1]
     var textarea_editor_name = "code_editor_" + id_num.toString();
     var textarea_editor = window[textarea_editor_name];
+
     textarea_editor.setOption("mode", codemapper[obj.value]);
 }
