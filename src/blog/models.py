@@ -20,59 +20,23 @@ from taggit.models import TaggedItemBase
 
 
 
-class BlogIndexPage(RoutablePageMixin, Page):
+class BlogIndexPage(Page):
 
     subpage_types = ['blog.BlogPage']
 
-    @route(r'^$')
-    def top(self, request):
+    def get_context(self, request):
         context = super(BlogIndexPage, self).get_context(request)
         blogs = self.blogs
 
         tag = request.GET.get('tag')
         if tag:
             blogs = blogs.filter(tags__name=tag)
-
+        
         page = request.GET.get('page')
         blogs = self.get_paginated_blogs(page, blogs)
         context['blogs'] = blogs
-        return TemplateResponse(
-            request,
-            self.get_template(request),
-            context
-        )
 
-    @route(r'^portfolio/$')
-    def portfolio(self, request):
-        return TemplateResponse(
-            request,
-            self.get_template(request),
-            self.get_context(request)
-        )
-    
-    @route(r'^coding/$')
-    def coding(self, request):
-        return TemplateResponse(
-            request,
-            self.get_template(request),
-            self.get_context(request)
-        )
-    
-    @route(r'^resume/$')
-    def resume(self, request):
-        return TemplateResponse(
-            request,
-            self.get_template(request),
-            self.get_context(request)
-        )
-    
-    @route(r'^aboutme/$')
-    def aboutme(self, request):
-        return TemplateResponse(
-            request,
-            self.get_template(request),
-            self.get_context(request)
-        )
+        return context
     
     @property
     def blogs(self):

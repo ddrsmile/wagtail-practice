@@ -3,11 +3,8 @@ from __future__ import absolute_import, unicode_literals
 from django.db import models
 # wagtail
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, 
-                                                FieldRowPanel, 
-                                                MultiFieldPanel, 
-                                                InlinePanel, 
-                                                PageChooserPanel, 
-                                                StreamFieldPanel)
+                                                MultiFieldPanel,  
+                                                PageChooserPanel)
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 
