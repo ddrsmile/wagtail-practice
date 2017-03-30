@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NAME=joeyliu
+NAME=joeyliu.webapp
 ROOT=/srv/webapps/${NAME}
 BINDIR=${ROOT}/deploy/dev/bin
 DJANGODIR=${ROOT}/src
