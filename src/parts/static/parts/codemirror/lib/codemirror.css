@@ -1,35 +1,41 @@
 /* BASICS */
 
-.CodeMirror {
+.fieldname-code .CodeMirror {
     /* Set height, width, borders, and global font properties here */
+    height: auto;
+    min-height: 200px;
     font-family: Monaco, 'Andale Mono', 'Lucida Console', 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace;
     font-size: 11pt;
     height: 100%;
     color: black;
 }
 
+.fieldname-code .CodeMirror-scroll {
+    min-height: 200px;
+}
+
 /* PADDING */
 
-.CodeMirror-lines {
+.fieldname-code .CodeMirror-lines {
   padding: 4px 0; /* Vertical padding around content */
 }
-.CodeMirror pre {
+.fieldname-code .CodeMirror pre {
   padding: 0 4px; /* Horizontal padding of content */
 }
 
-.CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler {
+.fieldname-code .CodeMirror-scrollbar-filler, .fieldname-code .CodeMirror-gutter-filler {
   background-color: white; /* The little square between H and V scrollbars */
 }
 
 /* GUTTER */
 
-.CodeMirror-gutters {
+.fieldname-code .CodeMirror-gutters {
   border-right: 1px solid #ddd;
   background-color: #f7f7f7;
   white-space: nowrap;
 }
-.CodeMirror-linenumbers {}
-.CodeMirror-linenumber {
+
+.fieldname-code .CodeMirror-linenumber {
   padding: 0 3px 0 5px;
   min-width: 20px;
   text-align: right;
@@ -37,30 +43,30 @@
   white-space: nowrap;
 }
 
-.CodeMirror-guttermarker { color: black; }
-.CodeMirror-guttermarker-subtle { color: #999; }
+.fieldname-code .CodeMirror-guttermarker { color: black; }
+.fieldname-code .CodeMirror-guttermarker-subtle { color: #999; }
 
 /* CURSOR */
 
-.CodeMirror-cursor {
+.fieldname-code .CodeMirror-cursor {
   border-left: 1px solid black;
   border-right: none;
   width: 0;
 }
 /* Shown when moving in bi-directional text */
-.CodeMirror div.CodeMirror-secondarycursor {
+.fieldname-code .CodeMirror div.CodeMirror-secondarycursor {
   border-left: 1px solid silver;
 }
-.cm-fat-cursor .CodeMirror-cursor {
+.fieldname-code .cm-fat-cursor .CodeMirror-cursor {
   width: auto;
   border: 0 !important;
   background: #7e7;
 }
-.cm-fat-cursor div.CodeMirror-cursors {
+.fieldname-code .cm-fat-cursor div.CodeMirror-cursors {
   z-index: 1;
 }
 
-.cm-animate-fat-cursor {
+.fieldname-code .cm-animate-fat-cursor {
   width: auto;
   border: 0;
   -webkit-animation: blink 1.06s steps(1) infinite;
@@ -85,16 +91,16 @@
 }
 
 /* Can style cursor different in overwrite (non-insert) mode */
-.CodeMirror-overwrite .CodeMirror-cursor {}
+.fieldname-code .CodeMirror-overwrite .CodeMirror-cursor {}
 
-.cm-tab { display: inline-block; text-decoration: inherit; }
+.fieldname-code .cm-tab { display: inline-block; text-decoration: inherit; }
 
-.CodeMirror-rulers {
+.fieldname-code .CodeMirror-rulers {
   position: absolute;
   left: 0; right: 0; top: -50px; bottom: -20px;
   overflow: hidden;
 }
-.CodeMirror-ruler {
+.fieldname-code .CodeMirror-ruler {
   border-left: 1px solid #ccc;
   top: 0; bottom: 0;
   position: absolute;
