@@ -21,6 +21,7 @@
 </style>
 
 <div class="main-content-box">
+    <h1>{{ self.title }}</h1>
     {% if blogs %}
         {% for blog in blogs %}
             {% include "blog/includes/blog_list_item.html" %}

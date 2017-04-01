@@ -56,7 +56,7 @@ a, a:hover, a:active, a:visited {
     color: #CD9B1D;
     font-size: 0.9rem;
 }
-.td-hover {
+.td-active, .td-hover {
     border-bottom-color: rgba(205,155,29,0.75) !important;
 }
 .navbar-table td a,
