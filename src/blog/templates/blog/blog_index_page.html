@@ -3,31 +3,70 @@
 
 {% block content %}
 <style>
-    a.list-group-item:not(:last-child) {
-        margin-bottom: 0.5rem;
+    .post-info-wrapper>*:not(hr) {
+        margin: 9px 0px 0px 0px;
     }
-    a.list-group-item img {
-        width: 10rem;
-        height: 7.5rem;
-        overflow: hidden;
+    .post-title > a {
+        color: inherit;
     }
+    .post-title > a:hover {
+        opacity:0.5;
+    }
+    .meta-text {
+        font-family: "Ubuntu";
+        color: #777777;
+    }
+    .blog-item .post-info-wrapper p.post-meta span {
+        display: block;
+        font-size: 0.6rem;
+        font-weight: 600;
+    }
+    hr.post_meta_hr {
+        margin: 0.5rem 0;
+    }
+    .post_tag_list ul {
+        margin: 0;
+        padding: 0;
+    }
+    .post_tag_list ul li {
+        display: inline;
+        font-weight: 600;
+    }
+    .post_tag_list ul li+li {
+        margin: 0 0.3rem;
+    }
+    .post_tag_list ul li a {
+        display: inline-block;
+        color: #FFFFFF;
+        background-color: #CD9B1D;
+        border-radius: 3px;
+        padding: 0 0.2rem;
+        font-size: 0.6rem;
+    }
+    .post_tag_list ul li a:hover {
+        color: #777777;
+    }
+    article:not(:last-child) {
+        margin-bottom: 2.5rem;
+    }
+    
     @media only screen 
     and (max-width: 1024px) {
-        .list-group-item:first-child,
-        .list-group-item:last-child {
-            border-radius: 0;
+        .main-content-box {
+            padding: 0 15px;
         }
     }
 </style>
 
 <div class="main-content-box">
-    <h1>{{ self.title }}</h1>
-    {% if blogs %}
-        {% for blog in blogs %}
-            {% include "blog/includes/blog_list_item.html" %}
-        {% empty %}
-            No blogs fund
-        {% endfor %}
-    {% endif %}
+    <div class="row">
+        {% if blogs %}
+            {% for blog in blogs %}
+                {% include "blog/includes/blog_list_item.html" %}
+            {% empty %}
+                No blogs fund
+            {% endfor %}
+        {% endif %}
+    </div>
 </div>
 {% endblock %}

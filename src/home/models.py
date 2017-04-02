@@ -17,7 +17,7 @@ class HomePage(RoutablePageMixin, Page):
             self.get_template(request),
             self.get_context(request)
         )
-    
+
     @route(r'^resume/$')
     def resume(self, request):
         return TemplateResponse(

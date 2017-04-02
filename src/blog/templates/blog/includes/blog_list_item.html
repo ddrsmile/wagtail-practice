@@ -1,19 +1,36 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
-<a class="list-group-item" href="{% pageurl blog %}">
-    <div class="media">
-        {% if blog.feed_image %}
-        <div class="media-left">
-            {% image blog.feed_image width-200 as img %}
-            <img class="media-object" src="{{ img.url }}" />
-        </div>
-        {% endif %}
-        <div class="media-body">
-        <h4 class="media-heading">{{ blog.title }}</h4>
-        <p><strong>{{ blog.date }}</strong></p>
-        {% if blog.search_description %}
-            <p>{{ blog.search_description }}</p>
-        {% endif %}
+<article class="col-sm-6 col-sm-offset-3">
+    <div class="blog-item clearfix">
+        <div class="post-info-wrapper">
+            <p class="post-meta">
+                <span class="meta-text">
+                    {{ blog.date }}
+                </span>
+            </p>
+            <h3 class="post-title"><a href="{% pageurl blog %}">{{ blog.title }}</a></h3>
+            {% if blog.search_description %}
+            <div class="blog_post_description">
+                <p class="meta-text">{{ blog.search_description }}</p>
+            </div>
+            {% endif %}
+            <div class="post_meta clearfix">
+                <hr class="post_meta_hr" />
+                <span class="post_tag_list">
+                <ul>
+                    {% for tag in blog.tags.all %}
+                    <li class="flex-align">
+                        <a href="{% pageurl blog.blog_index %}?tag={{ tag }}">
+                            {{ tag }}
+                        </a>
+                    </li>
+                    {% empty %}
+                        <li class="tag-notfound">tags not found!!</li>
+                    {% endfor %}
+                </ul>
+                </span>
+                <hr class="post_meta_hr" />
+            </div>
         </div>
     </div>
-</a>
+</article>
