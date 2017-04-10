@@ -9,3 +9,4 @@ dev.py
 src/static/*
 src/media/*
 .vscode/
+.idea/
