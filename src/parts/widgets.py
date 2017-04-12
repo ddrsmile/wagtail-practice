@@ -5,38 +5,10 @@ from django.contrib.staticfiles.templatetags.staticfiles import static
 # wagtail
 from wagtail.utils.widgets import WidgetWithScript
 
-def git_id_num(id):
-    words = id.split('-')
-    for word in words:
-        try:
-            int(word)
-            return str(word)
-        except ValueError:
-            pass
-    return None
-
 class CodeTextWidget(WidgetWithScript, widgets.Textarea):
     def render_js_init(self, id_, name, value):
         # default mode is set to python
 
-        #jsinit = """
-        #    code_editor_{suffix!s} = CodeMirror.fromTextArea(
-        #        document.getElementById("{id!s}"),
-        #        {{
-        #            mode: "python",
-        #            theme: "solarized light",
-        #            lineNumbers: true,
-        #            styleActiveLine: true,
-        #            matchBrackets: true,
-        #            indentUnit: 4,
-        #            extraKeys: {{
-        #                "Tab": function(cm){{
-        #                    cm.replaceSelection("    " , "end");
-        #                }}
-        #            }}
-        #        }}
-        #    )
-        #"""
         jsinit = """
             if (window.CodeMirrorInstances == null) {{
                 window.CodeMirrorInstances = {{}};
@@ -60,7 +32,7 @@ class CodeTextWidget(WidgetWithScript, widgets.Textarea):
             
             window.CodeMirrorInstances["{id!s}"] = cm;
         """
-        return jsinit.format(suffix=git_id_num(name), id=id_)
+        return jsinit.format(id=id_)
     
     @property
     def media(self):
@@ -90,7 +62,9 @@ class MarkDownWidget(WidgetWithScript, widgets.Textarea):
             sm = new SimpleMDE({{
                 element: document.getElementById("{id!s}"),
                 forceSync: true,
-                spellChecker: false
+                spellChecker: false,
+                previewRender: latex_support
+
             }})
             window.SimpleMDEInstances.push(sm);
         """
@@ -100,9 +74,39 @@ class MarkDownWidget(WidgetWithScript, widgets.Textarea):
     def media(self):
         js = [
             static('parts/simplemde/simplemde.min.js'),
+            static('parts/simplemde/utils/markdown_latex_support.js'),
         ]
         css = {
             'all': [
                 static('parts/simplemde/simplemde.min.css'),
         ]}
+        return Media(js=js, css=css)
+
+class MathJaxWidget(WidgetWithScript, widgets.Textarea):
+
+    def render_js_init(self, id_, name, value):
+        jsinit = """
+            if (window.MathJaxSimpleMDEInstances == null) {{
+                window.MathJaxSimpleMDEInstances = [];
+            }}
+            mjsm = new SimpleMDE({{
+                element: document.getElementById("{id!s}"),
+                forceSync: true,
+                spellChecker: false,
+                previewRender: latex_support
+            }})
+            window.MathJaxSimpleMDEInstances.push(mjsm);
+        """
+        return jsinit.format(id=id_)
+
+    @property
+    def media(self):
+        js = [
+            static('parts/simplemde/utils/markdown_latex_support.js'),
+            static('parts/simplemde/simplemde.min.js'),
+        ]
+        css = {
+            'all': [
+                static('parts/simplemde/simplemde.min.css'),
+            ]}
         return Media(js=js, css=css)
