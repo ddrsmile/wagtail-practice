@@ -42,7 +42,7 @@ class CodeChoiceBlock(ChoiceBlock):
                                               required=required, 
                                               help_text=help_text, 
                                               **kwargs)
-        self.field.widget.attrs.update({'onchange': 'update_mode(this)'})
+        self.field.widget.attrs.update({'onchange': 'update_code_mode(this)'})
 
 class CodeTextBlock(TextBlock):
     @cached_property

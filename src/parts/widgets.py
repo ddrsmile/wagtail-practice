@@ -15,13 +15,33 @@ def git_id_num(id):
             pass
     return None
 
-import logging
 class CodeTextWidget(WidgetWithScript, widgets.Textarea):
     def render_js_init(self, id_, name, value):
         # default mode is set to python
-        logging.info(id_)
+
+        #jsinit = """
+        #    code_editor_{suffix!s} = CodeMirror.fromTextArea(
+        #        document.getElementById("{id!s}"),
+        #        {{
+        #            mode: "python",
+        #            theme: "solarized light",
+        #            lineNumbers: true,
+        #            styleActiveLine: true,
+        #            matchBrackets: true,
+        #            indentUnit: 4,
+        #            extraKeys: {{
+        #                "Tab": function(cm){{
+        #                    cm.replaceSelection("    " , "end");
+        #                }}
+        #            }}
+        #        }}
+        #    )
+        #"""
         jsinit = """
-            code_editor_{suffix!s} = CodeMirror.fromTextArea(
+            if (window.CodeMirrorInstances == null) {{
+                window.CodeMirrorInstances = {{}};
+            }}
+            cm = CodeMirror.fromTextArea(
                 document.getElementById("{id!s}"),
                 {{
                     mode: "python",
@@ -37,6 +57,8 @@ class CodeTextWidget(WidgetWithScript, widgets.Textarea):
                     }}
                 }}
             )
+            
+            window.CodeMirrorInstances["{id!s}"] = cm;
         """
         return jsinit.format(suffix=git_id_num(name), id=id_)
     
