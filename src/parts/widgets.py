@@ -81,32 +81,3 @@ class MarkDownWidget(WidgetWithScript, widgets.Textarea):
                 static('parts/simplemde/simplemde.min.css'),
         ]}
         return Media(js=js, css=css)
-
-class MathJaxWidget(WidgetWithScript, widgets.Textarea):
-
-    def render_js_init(self, id_, name, value):
-        jsinit = """
-            if (window.MathJaxSimpleMDEInstances == null) {{
-                window.MathJaxSimpleMDEInstances = [];
-            }}
-            mjsm = new SimpleMDE({{
-                element: document.getElementById("{id!s}"),
-                forceSync: true,
-                spellChecker: false,
-                previewRender: latex_support
-            }})
-            window.MathJaxSimpleMDEInstances.push(mjsm);
-        """
-        return jsinit.format(id=id_)
-
-    @property
-    def media(self):
-        js = [
-            static('parts/simplemde/utils/markdown_latex_support.js'),
-            static('parts/simplemde/simplemde.min.js'),
-        ]
-        css = {
-            'all': [
-                static('parts/simplemde/simplemde.min.css'),
-            ]}
-        return Media(js=js, css=css)

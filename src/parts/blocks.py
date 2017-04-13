@@ -22,7 +22,7 @@ from pygments.formatters import get_formatter_by_name
 from pygments.lexers import get_lexer_by_name
 from markdown2 import markdown
 # customization
-from parts.widgets import MarkDownWidget, CodeTextWidget, MathJaxWidget
+from parts.widgets import MarkDownWidget, CodeTextWidget
 
 LANGUAGES = ( 
     ('cpp', 'C++'),
@@ -91,23 +91,6 @@ class MarkDownBlock(TextBlock):
     class Meta:
         icon = 'code'
 
-class MathJaxBlock(TextBlock):
-    @cached_property
-    def field(self):
-        field_kwargs = {
-            'widget': MarkDownWidget(),
-        }
-        field_kwargs.update(self.field_options)
-        return forms.CharField(**field_kwargs)
-
-    def render_basic(self, value, context=None):
-        extras = ["code-friendly", "fenced-code-blocks"]
-        marked_content = markdown(value, extras=extras)
-        return mark_safe(marked_content)
-
-    class Meta:
-        icon = 'code'
-
 class PullQuoteBlock(StructBlock):
     quote = TextBlock("quote title")
     attribution = CharBlock()
@@ -143,7 +126,6 @@ class BlogStreamBlock(StreamBlock):
     h4 = CharBlock(icon="title", classname="title")
     code = CodeBlock()
     markdown = MarkDownBlock()
-    mathjax = MathJaxBlock()
     aligned_image = ImageBlock(label="Aligned image", icon="image")
     pullquote = PullQuoteBlock()
     aligned_html = AlignedHTMLBlock(icon="code", label='Raw HTML')
