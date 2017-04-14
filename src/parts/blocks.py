@@ -89,7 +89,7 @@ class MarkDownBlock(TextBlock):
         return mark_safe(marked_content)
 
     class Meta:
-        icon = 'code'
+        icon = 'edit'
 
 class PullQuoteBlock(StructBlock):
     quote = TextBlock("quote title")
@@ -121,12 +121,12 @@ class AlignedHTMLBlock(StructBlock):
         icon = "code"
 
 class BlogStreamBlock(StreamBlock):
-    h2 = CharBlock(icon="title", classname="title")
-    h3 = CharBlock(icon="title", classname="title")
-    h4 = CharBlock(icon="title", classname="title")
-    code = CodeBlock()
+    #h2 = CharBlock(icon="title", classname="title")
+    #h3 = CharBlock(icon="title", classname="title")
+    #h4 = CharBlock(icon="title", classname="title")
     markdown = MarkDownBlock()
+    code = CodeBlock()
     aligned_image = ImageBlock(label="Aligned image", icon="image")
     pullquote = PullQuoteBlock()
-    aligned_html = AlignedHTMLBlock(icon="code", label='Raw HTML')
+    #aligned_html = AlignedHTMLBlock(icon="code", label='Raw HTML')
     document = DocumentChooserBlock(icon="doc-full-inverse")
