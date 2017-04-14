@@ -83,37 +83,3 @@ MathJax.Hub.Config({
 </script>
 <script type="text/javascript" src="{% static 'js/MathJax/MathJax.js' %}?config=TeX-AMS-MML_HTMLorMML"></script>
 {% endblock %}
-<!--
-
-<link rel="stylesheet" type="text/css" href="{% static 'css/slider-pro.min.css' %}">
-<link rel="stylesheet" href="{% static 'css/default.css' %}">
-<script>
-    var carousel_list = [];
-</script>
-<div class="page-header">
-    <h1>{{ self.title }}</h1>
-</div>
-<div class="main-content-box">
-    {% for block in self.body %}
-    <div>
-        {% if block.block_type == "carousel" %}
-        {{ block.value.carousel_title }}
-        <script>carousel_list.push("carousel_{{ block.value.carousel_title }}");</script>
-        {% endif %}
-        {% include_block block %}
-    </div>
-    {% endfor %}
-</div>
-
-<script type="text/javascript" src="{% static 'js/jquery.sliderPro.min.js' %}"></script>
-<script>
-$(document).ready(function(){
-    for (var i = 0; i < carousel_list.length; i++) {
-        window[carousel_list[i]]();
-    }
-});
-</script>
-<script src="{% static 'js/highlight.pack.js' %}"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
--->
