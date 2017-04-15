@@ -31,21 +31,19 @@ body {
     width: 100%;
     max-width: 1024px;
     font-family: 'Open Sans', sans-serif;
-    color: #1B1B1B;
+    color: #3D3D3D;
     font-size: 0.8rem;
     line-height: 1.5;
     margin: 0 auto;
 }
  #navbar, .navbar-table, .paginator {
     font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
-    color: #CD9B1D;
 }
 h1, h2, h3 {
     font-family: 'Ubuntu', sans-serif;
-    color: #CD9B1D;
 }
 .logo-name h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 /*
 img#bkgd {
@@ -58,6 +56,9 @@ img#bkgd {
     left:0;
     z-index: -1;
 }
+
+old color: #CD9B1D
+
 */
 /* NAVI-TABLE */
 .navbar-table {
@@ -70,20 +71,20 @@ img#bkgd {
     border-bottom: 0.05rem solid rgba(0,0,0,0);
 }
 a, a:hover, a:active, a:visited {
+    color: #3D3D3D;
     text-decoration:none !important;
 }
 .navbar-table td a,
 .navbar-table td a:hover,
 .navbar-table td a:visited,
 .navbar-table td a:active {
-    color: #CD9B1D;
     font-size: 0.9rem;
 }
 .td-active {
-    border-bottom-color: rgba(205,155,29,0.75) !important;
+    border-bottom-color: rgba(45,45,45,0.75) !important;
 }
 .td-hover {
-    border-bottom-color: rgba(205,155,29,0.25) !important;
+    border-bottom-color: rgba(45,45,45,0.25) !important;
 }
 .navbar-table td a,
 .navbar-table td {
@@ -98,7 +99,6 @@ a, a:hover, a:active, a:visited {
 .navbar-brand {
     font-size: 2rem;
     font-family: 'Ubuntu', sans-serif;
-    color: #CD9B1D;
 }
 .navbar-toggle,
 .navbar-toggle:hover {
@@ -107,7 +107,7 @@ a, a:hover, a:active, a:visited {
 }
 .navbar-toggle .icon-bar {
     width: 22px;
-    background-color: #CD9B1D !important;
+    background-color: #3D3D3D !important;
     transition: all 0.2s;
 }
 .navbar-toggle .top-bar {
@@ -130,7 +130,6 @@ a, a:hover, a:active, a:visited {
 }
 #navbar>ul.nav.navbar-nav>li>a {
     font-size: 1rem;
-    color: #CD9B1D;
 }
 /* CUSTOMIZE RESPONSIVE */
 @media only screen 
