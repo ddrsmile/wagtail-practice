@@ -2,10 +2,10 @@ from __future__ import absolute_import, unicode_literals
 # django
 from django.db import models
 from django.utils import timezone
-from django.template.response import TemplateResponse
+#from django.template.response import TemplateResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # wagtail
-from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
+#from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailcore.models import Page, Orderable
@@ -13,7 +13,7 @@ from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailsearch import index
 # customization
 from parts.blocks import BlogStreamBlock
-from parts.fields import RelatedLink, CarouselItem
+from parts.fields import RelatedLink
 from modelcluster.fields import ParentalKey
 from modelcluster.tags import ClusterTaggableManager
 from taggit.models import TaggedItemBase
@@ -56,10 +56,6 @@ class BlogIndexPage(Page):
 
 BlogIndexPage.content_panels = Page.content_panels
 
-class BlogPageCarouselItem(Orderable, CarouselItem):
-    page = ParentalKey('blog.BlogPage', related_name='carousel_items')
-
-
 class BlogPageRelatedLink(Orderable, RelatedLink):
     page = ParentalKey('blog.BlogPage', related_name='related_links')
 
@@ -95,7 +91,6 @@ BlogPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('date'),
     StreamFieldPanel('body'),
-    InlinePanel('carousel_items', label="Carousel items"),
     InlinePanel('related_links', label="Related links"),
 ]
 
