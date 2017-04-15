@@ -1,32 +1,122 @@
 {% extends "base.html" %}
 {% load static wagtailcore_tags wagtailimages_tags %}
-
-{% block content %}
+{% block heading %}
 <style type="text/css">
-    .home-quote {
-        position: relative;
-        top:5rem;
-        left:0;
-        width: 100%;
-        padding: 0 2rem;
+    /* Gradient transparent - color - transparent */
+
+    hr.title {
+        text-align: center;
+        border: 0;
+        height: 1px;
+        background-image: linear-gradient(to right, rgba(45, 45, 45, 0), rgba(45, 45, 45, 0.80), rgba(45, 45, 45, 0));
+        margin: 5rem 0;
     }
-    .home-quote p {
-        font-family: "trashhand";
-        color: #CD9B1D;
-        font-weight: 600;
+    hr.title:after {
+        font-family: "Ubuntu";
+        content: 'Joey Liu | NANTSOU';
+        display: inline-block;
+        position: relative;
+        top: -1.5rem;
+        padding: 0 1rem;
+        background: #FFFFFF;
+        color: #3D3D3D;
         font-size: 2rem;
     }
-    .home-quote p.quote-author {
-        color: #777777;
+</style>
+    <hr class="title" />
+{% endblock %}
+{% block content %}
+<style type="text/css">
+    article:not(:last-child) {
+        margin-bottom: 2.5rem;
+    }
+    .category-item {
+        padding: 0 15px;
+        margin-bottom: 2rem;
+        border: 0.01rem solid rgba(46,61,73,0.15);
+        border-radius: 0.375rem;
+        box-shadow: 12px 15px 20px 0px rgba(46,61,73,0.15);
+        transition: all 0.3s ease;
+    }
+    .category-item-hover {
+        box-shadow:2px 4px 8px 0px rgba(46,61,73,0.2) !important;
+    }
+    .category-item-wrapper {
+        font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+        text-align: center;
         font-size: 1.5rem;
-        float: right;
+        padding: 3rem 0;
+    }
+    .category-item-wrapper > a:hover {
+        opacity: 0.75;
+    }
+    @media only screen
+    and (max-width: 1024px) {
+        .main-content-box {
+            padding: 0 15px;
+        }
     }
 </style>
-<div class="home-quote clearfix">
-    <div class="quote-content">
-        <p>If you want something you've never had</p>
-        <p class="pull-right">You must be willing to do something you've never done.</p>
+<section class="main-content-box">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+    <div class="row">
+        <article class="col-sm-6">
+            <div class="category-item clearfix">
+                <div class="category-item-wrapper">
+                    <a href="/blogs/">
+                        <i class="fa fa-pencil fa-fw" aria-hidden="true"></i>
+                        <span class="category-text">BLOG</span>
+                    </a>
+                </div>
+            </div>
+        </article>
+        <article class="col-sm-6">
+            <div class="category-item clearfix">
+                <div class="category-item-wrapper">
+                    <a href="/portfolios/">
+                        <i class="fa fa-book fa-fw" aria-hidden="true"></i>
+                        <span class="category-text">PORTFOLIO</span>
+                    </a>
+                </div>
+            </div>
+        </article>
+        <article class="col-sm-6">
+            <div class="category-item clearfix">
+                <div class="category-item-wrapper">
+                    <a href="/resume/">
+                        <i class="fa fa-file-text fa-fw" aria-hidden="true"></i>
+                        <span class="category-text">RESUME</span>
+                    </a>
+                </div>
+            </div>
+        </article>
+        <article class="col-sm-6">
+            <div class="category-item clearfix">
+                <div class="category-item-wrapper">
+                    <a href="/aboutme/">
+                        <i class="fa fa-id-card fa-fw" aria-hidden="true"></i>
+                        <span class="category-text">ABOUTME</span>
+                    </a>
+                </div>
+            </div>
+        </article>
     </div>
-    <p class="quote-author">by Thomas Jefferson</p>
-</div>
+</section>
+{% endblock %}
+{% block extra_js %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $.each($('.category-item'), function() {
+            var category_item = this;
+            $(category_item).find('.category-item-wrapper a').hover(
+            function () {
+                $(category_item).addClass('category-item-hover');
+            },
+            function () {
+                $(category_item).removeClass('category-item-hover');
+            }
+        );
+        });
+    });
+</script>
 {% endblock %}

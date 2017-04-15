@@ -71,7 +71,7 @@
     }
 </style>
 
-<div class="main-content-box">
+<section class="main-content-box">
     <div class="row">
         {% if blogs %}
             {% for blog in blogs %}
@@ -81,11 +81,25 @@
             {% endfor %}
         {% endif %}
     </div>
-</div>
+</section>
 {% endblock %}
 
 {% block extra_js %}
 <script type="text/javascript">
+    $(document).ready(function() {
+        $.each($('.blog-item'), function() {
+            var blog_item = this;
+            $(blog_item).find('h3.post-title a').hover(
+            function () {
+                $(blog_item).addClass('blog-item-hover');
+            },
+            function () {
+                $(blog_item).removeClass('blog-item-hover');
+            }
+        );
+        });
+    });
+    /*
     // make sure jquery object can be used after jquery is being load with async attribution.
     document.getElementById('jquery').addEventListener('load', function () {
         $(document).ready(function() {
@@ -102,5 +116,6 @@
             });
         });
     });
+    */
 </script>
 {% endblock %}
