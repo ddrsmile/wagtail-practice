@@ -3,6 +3,14 @@
 
 {% block content %}
 <style text="text/css">
+    .page-meta {
+        font-size: 1rem;
+        font-weight: 600;
+    }
+    .meta-text {
+        font-family: "Ubuntu";
+        color: #777777;
+    }
     .tag-list ul {
         margin-top: -0.8rem;
         margin-bottom: 1rem;
@@ -10,30 +18,31 @@
     }
     .tag-list ul li {
         display: inline;
-        color: #767676;
         font-weight: 600;
     }
     .tag-list ul li+li {
         margin: 0 0.3rem;
     }
     .tag-list ul li a {
-        color: #767676;
+        display: inline-block;
+        color: #FFFFFF;
+        background-color: #CD9B1D;
+        border-radius: 3px;
+        padding: 0 0.2rem;
+        font-size: 0.7rem;
     }
     .tag-list ul li a:hover {
-        color: #CD9B1D;
+        color: #777777;
     }
 </style>
 <div class="page-header">
-
     <h2>
         {{ self.title }}
-        {% if self.date %}<small>{{ self.date }}</small>{% endif %}
+        <span class="page-meta meta-text">{{ self.date }}</span>
     </h2>
-
 </div>
 <div class="tag-list">
     <ul>
-        <li class="tag-label">Tags:</li>
         {% for tag in self.tags.all %}
         <li>
             <a href="{% pageurl self.blog_index %}?tag={{ tag }}" class="">
@@ -46,28 +55,43 @@
     </ul>
 </div>
 
-    <style text="text/css">
+<style text="text/css">
+.body-content {
+    background: #FFFFFF;
+    padding: 1rem 1.25rem;
+    border: 0.1rem solid #F5F5F5;
+    border-radius: 0.375rem;
+    margin-bottom: 2.5rem;
+    box-shadow: 12px 15px 20px 0px rgba(46,61,73,0.15);
+}
+.body-content h1,
+.body-content h2,
+.body-content h3 {
+    font-family: 'Open Sans', sans-serif;
+    color: #000;
+}
+@media only screen
+and (max-width: 1024px) {
+    .page-header,
+    .tag-list ul {
+        padding: 0 15px;
+    }
     .body-content {
-        background: #F5F5F5;
-        padding: 1rem 1.25rem;
-        border-radius: 0.2rem;
-        margin-bottom: 2.5rem;
-        
+        padding: 15px;
+        border-radius: 0;
+        box-shadow: none;
     }
-    @media only screen 
-    and (max-width: 1024px) {
-        .body-content {
-            border-radius: 0;
-        }
-    }
-    </style>
-    <link rel="stylesheet" href="{% static 'css/github.css' %}">
-    <div class="body-content">
-        {% if self.body %}
-            {% include "blog/includes/stream_fields.html" with content=self.body %}
-        {% endif %}
-    </div>
+}
+</style>
+<link rel="stylesheet" href="{% static 'css/github.css' %}">
+<div class="body-content">
+    {% if self.body %}
+        {% include "blog/includes/stream_fields.html" with content=self.body %}
+    {% endif %}
+</div>
+{% endblock %}
 
+{% block extra_js %}
 <!-- mathjax config -->
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -81,5 +105,5 @@ MathJax.Hub.Config({
     "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
 });
 </script>
-<script type="text/javascript" src="{% static 'js/MathJax/MathJax.js' %}?config=TeX-AMS-MML_HTMLorMML"></script>
+<script async type="text/javascript" src="{% static 'js/MathJax/MathJax.js' %}?config=TeX-AMS-MML_HTMLorMML"></script>
 {% endblock %}
