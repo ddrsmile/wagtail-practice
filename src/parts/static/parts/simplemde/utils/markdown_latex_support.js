@@ -8,7 +8,7 @@ var import_mathjax = '<script type="text/x-mathjax-config"> \
                           processEscapes: true,\
                       }) \
                       </script>\
-                      <script async type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>';
+                      <script async type="text/javascript" src="/static/js/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>';
 
 document.write(import_mathjax);
 function latex_support(plainText) {
