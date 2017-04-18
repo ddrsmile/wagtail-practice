@@ -1,0 +1,16 @@
+{% extends "post/post_index_page.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block post_index_like_content %}
+<section class="main-content-box">
+    <div class="row">
+        {% if posts %}
+            {% for post in posts %}
+                {% include "post/includes/blog_list.html" %}
+            {% empty %}
+                <h1>No blogs found</h1>
+            {% endfor %}
+        {% endif %}
+    </div>
+</section>
+{% endblock post_index_like_content %}

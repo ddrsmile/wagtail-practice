@@ -16,20 +16,20 @@
         font-family: "Ubuntu";
         color: #777777;
     }
-    .blog-item {
+    .post-item {
         padding: 0 15px;
         border: 0.01rem solid rgba(46,61,73,0.15);
         border-radius: 0.375rem;
         box-shadow: 12px 15px 20px 0px rgba(46,61,73,0.15);
         transition: all 0.3s ease;
     }
-    .blog-item-hover {
+    .post-item-hover {
         box-shadow:2px 4px 8px 0px rgba(46,61,73,0.2) !important;
     }
-    .blog-item .post-info-wrapper {
+    .post-item .post-info-wrapper {
         margin: 0.5rem 0;
     }
-    .blog-item .post-info-wrapper p.post-meta span {
+    .post-item .post-info-wrapper p.post-meta span {
         display: block;
         font-size: 0.6rem;
         font-weight: 600;
@@ -70,52 +70,27 @@
         }
     }
 </style>
-
+{% block post_index_like_content %}
 <section class="main-content-box">
-    <div class="row">
-        {% if blogs %}
-            {% for blog in blogs %}
-                {% include "blog/includes/blog_list_item.html" %}
-            {% empty %}
-                No blogs fund
-            {% endfor %}
-        {% endif %}
-    </div>
+    <h1>Please add blog index like template!!!</h1>
 </section>
+{% endblock post_index_like_content %}
 {% endblock %}
 
 {% block extra_js %}
 <script type="text/javascript">
     $(document).ready(function() {
-        $.each($('.blog-item'), function() {
-            var blog_item = this;
-            $(blog_item).find('h3.post-title a').hover(
+        $.each($('.post-item'), function() {
+            var post_item = this;
+            $(post_item).find('h3.post-title a').hover(
             function () {
-                $(blog_item).addClass('blog-item-hover');
+                $(post_item).addClass('post-item-hover');
             },
             function () {
-                $(blog_item).removeClass('blog-item-hover');
+                $(post_item).removeClass('post-item-hover');
             }
         );
         });
     });
-    /*
-    // make sure jquery object can be used after jquery is being load with async attribution.
-    document.getElementById('jquery').addEventListener('load', function () {
-        $(document).ready(function() {
-            $.each($('.blog-item'), function() {
-                var blog_item = this;
-                $(blog_item).find('h3.post-title a').hover(
-                function () {
-                    $(blog_item).addClass('blog-item-hover');
-                },
-                function () {
-                    $(blog_item).removeClass('blog-item-hover');
-                }
-            );
-            });
-        });
-    });
-    */
 </script>
 {% endblock %}

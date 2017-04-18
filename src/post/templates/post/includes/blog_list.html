@@ -1,26 +1,26 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
 <article class="col-sm-6 col-sm-offset-3">
-    <div class="blog-item clearfix">
+    <div class="post-item clearfix">
         <div class="post-info-wrapper">
             <p class="post-meta">
                 <span class="meta-text">
-                    {{ blog.date }}
+                    {{ post.date }}
                 </span>
             </p>
-            <h3 class="post-title"><a href="{% pageurl blog %}">{{ blog.title }}</a></h3>
-            {% if blog.search_description %}
-            <div class="blog_post_description">
-                <p class="meta-text">{{ blog.search_description }}</p>
+            <h3 class="post-title"><a href="{% pageurl post %}">{{ post.title }}</a></h3>
+            {% if post.search_description %}
+            <div class="post_post_description">
+                <p class="meta-text">{{ post.search_description }}</p>
             </div>
             {% endif %}
             <div class="post_meta clearfix">
                 <hr class="post_meta_hr" />
                 <span class="post_tag_list">
                 <ul>
-                    {% for tag in blog.tags.all %}
+                    {% for tag in post.tags.all %}
                     <li class="flex-align">
-                        <a href="{% pageurl blog.blog_index %}?tag={{ tag }}">
+                        <a href="{% pageurl post.post_index %}?tag={{ tag }}">
                             {{ tag }}
                         </a>
                     </li>

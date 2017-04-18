@@ -45,7 +45,7 @@
     <ul>
         {% for tag in self.tags.all %}
         <li>
-            <a href="{% pageurl self.blog_index %}?tag={{ tag }}" class="">
+            <a href="{% pageurl self.post_index %}?tag={{ tag }}" class="">
                 {{ tag }}
             </a>
         </li>
@@ -86,7 +86,7 @@ and (max-width: 1024px) {
 <link rel="stylesheet" href="{% static 'css/github.css' %}">
 <div class="body-content">
     {% if self.body %}
-        {% include "blog/includes/stream_fields.html" with content=self.body %}
+        {% include "post/includes/stream_fields.html" with content=self.body %}
     {% endif %}
 </div>
 {% endblock %}

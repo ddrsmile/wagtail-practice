@@ -120,13 +120,9 @@ class AlignedHTMLBlock(StructBlock):
     class Meta:
         icon = "code"
 
-class BlogStreamBlock(StreamBlock):
-    #h2 = CharBlock(icon="title", classname="title")
-    #h3 = CharBlock(icon="title", classname="title")
-    #h4 = CharBlock(icon="title", classname="title")
+class PostStreamBlock(StreamBlock):
     markdown = MarkDownBlock()
     code = CodeBlock()
     aligned_image = ImageBlock(label="Aligned image", icon="image")
     pullquote = PullQuoteBlock()
-    #aligned_html = AlignedHTMLBlock(icon="code", label='Raw HTML')
     document = DocumentChooserBlock(icon="doc-full-inverse")
