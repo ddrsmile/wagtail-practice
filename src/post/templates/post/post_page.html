@@ -3,8 +3,9 @@
 
 {% block content %}
 <style text="text/css">
-    .page-meta {
-        font-size: 1rem;
+    p.page-meta span {
+        display: block;
+        font-size: 0.8rem;
         font-weight: 600;
     }
     .meta-text {
@@ -36,11 +37,14 @@
     }
 </style>
 <div class="page-header">
-    <h2>
-        {{ self.title }}
-        <span class="page-meta meta-text">{{ self.date }}</span>
-    </h2>
+    <h2>{{ self.title }}</h2>
+    <p class="page-meta">
+        <span class="meta-text">
+            {{ self.date }}
+        </span>
+    </p>
 </div>
+
 <div class="tag-list">
     <ul>
         {% for tag in self.tags.all %}
