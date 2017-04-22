@@ -138,6 +138,9 @@ a, a:hover, a:active, a:visited {
     html {
         font-size: 16px;
     }
+    .navbar-brand {
+        font-size: 1.5rem;
+    }
 }
 @media only screen 
   and (min-width: 768px)
