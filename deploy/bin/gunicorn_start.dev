@@ -2,7 +2,6 @@
 
 NAME=joeyliu
 ROOT=/Users/Joey/webapps/${NAME}
-BINDIR=${ROOT}/deploy/dev/bin
 DJANGODIR=${ROOT}/src
 DEPLOYDIR=${ROOT}/deploy
 SOCKFILE=${DEPLOYDIR}/run/gunicorn_${NAME}.sock
