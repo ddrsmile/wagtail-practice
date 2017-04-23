@@ -55,10 +55,12 @@ class CodeTextBlock(TextBlock):
 
 class CodeBlock(StructBlock):
     language = CodeChoiceBlock(choices=LANGUAGES, blank=False, null=False, default='python')
+    caption = CharBlock(required=False, blank=True, nullable=True)
     code = CodeTextBlock()
 
-    def render(self, value):
+    def render(self, value, *args, **kwargs):
         src = value['code'].strip('\n')
+        caption = value['caption'].strip()
         lang = value['language']
 
         lexer = get_lexer_by_name(lang)
@@ -69,7 +71,12 @@ class CodeBlock(StructBlock):
             style='github',
             noclasses=False,
         )
-        return mark_safe(highlight(src, lexer, formatter))
+        render_content = highlight(src, lexer, formatter)
+        if caption:
+            caption_content = '<div class="code-caption">{}</div>\n'.format(caption)
+            render_content = caption_content + render_content
+
+        return mark_safe(render_content)
 
     class Meta:
         icon="code"

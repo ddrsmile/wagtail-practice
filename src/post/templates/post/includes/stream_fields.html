@@ -61,22 +61,35 @@
         margin: 1.5rem 0;
         font-size: 0.7rem;
     }
+    .stream-fields .markdown-wrapper {
+        padding-bottom: 0.5rem;
+        margin-bottom: 2rem;
+        border-bottom: 1px solid #eee;
+    }
+    .stream-fields .markdown-wrapper hr {
+        border-top: 1px dashed #8e8e8e;
+        margin: 1.2rem 1rem;
+    }
+    .stream-fields .code-wrapper {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin: 1.5rem 0;
+    }
+    .stream-fields .code-wrapper .code-caption {
+        padding: 0.1rem;
+        text-align:center;
+        background-color: #ccc;
+        font-weight: 600;
+        line-height: 1rem;
+    }
+    .stream-fields .code-wrapper pre {
+        border: none;
+        margin: 0;
+    }
 </style>
 <div class="stream-fields">
     {% for child in content %}
-        {% if child.block_type == 'h2' %}
-            <h2>{{ child }}</h2>
-        {% elif child.block_type == 'h3' %}
-            <h3>{{ child }}</h3>
-        {% elif child.block_type == 'h4' %}
-            <h4>{{ child }}</h4>
-        {% elif child.block_type == 'aligned_html' %}
-            {% if child.value.alignment == 'normal' %}
-                {{ child.value.bound_blocks.html.render }}
-            {% else %}
-                {{ child.value.bound_blocks.html.render }}
-            {% endif %}
-        {% elif child.block_type == 'pullquote' %}
+        {% if child.block_type == 'pullquote' %}
             <blockquote>
                 {{ child.value.quote }}
                 {% if child.value.attribution %}<span>- {{ child.value.attribution }}</span>{% endif %}
@@ -96,6 +109,14 @@
                         {{ child.value.caption|richtext }}
                     </div>
                 {% endif %}
+            </div>
+        {% elif child.block_type == 'markdown' %}
+            <div class="markdown-wrapper">
+                {{ child }}
+            </div>
+        {% elif child.block_type == 'code' %}
+            <div class="code-wrapper">
+                {{ child }}
             </div>
         {% else %}
             {{ child }}
