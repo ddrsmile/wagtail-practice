@@ -24,4 +24,14 @@ class HomePage(RoutablePageMixin, Page):
             self.get_context(request)
         )
 
+    def get_sitemap_urls(self):
+        return [
+            {
+                'location': self.full_url,
+                'lastmod': self.latest_revision_created_at,
+                'changefreq': 'yearly',
+                'priority': 1
+            }
+        ]
+
 HomePage.content_panels = Page.content_panels

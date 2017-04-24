@@ -59,6 +59,16 @@ class PostIndexPage(Page):
             posts = paginator.page(paginator.num_pages)
         return posts
 
+    def get_sitemap_urls(self):
+        return [
+            {
+                'location': self.full_url,
+                'lastmod': self.latest_revision_created_at,
+                'changefreq': 'weekly',
+                'priority': 0.8
+            }
+        ]
+
 PostIndexPage.content_panels = Page.content_panels
 
 class PostPageRelatedLink(Orderable, RelatedLink):
@@ -91,6 +101,16 @@ class PostPage(Page):
     def post_index(self):
         # Find closest ancestor which is a post index
         return self.get_ancestors().type(PostIndexPage).last()
+
+    def get_sitemap_urls(self):
+        return [
+            {
+                'location': self.full_url,
+                'lastmod': self.latest_revision_created_at,
+                'changefreq': 'never',
+                'priority': 0.5
+            }
+        ]
 
 PostPage.content_panels = [
     FieldPanel('title', classname="full title"),

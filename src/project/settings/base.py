@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'wagtail.wagtailsearch',
     'wagtail.wagtailadmin',
     'wagtail.wagtailcore',
+    'wagtail.contrib.wagtailsitemaps',
 
     'modelcluster',
     'taggit',
@@ -121,4 +122,4 @@ STATICFILES_DIRS = [
 
 # Wagtail settings
 
-WAGTAIL_SITE_NAME = "joeyliu"
+WAGTAIL_SITE_NAME = "Joey LIU | NANTSOU"
