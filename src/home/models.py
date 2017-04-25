@@ -33,7 +33,7 @@ class HomePage(RoutablePageMixin, Page):
                 'priority': 1
             },
             {
-                'location': self.full_url + '/aboutme/',
+                'location': self.full_url + 'aboutme/',
                 'lastmod': self.latest_revision_created_at,
                 'changefreq': 'monthly',
                 'priority': 0.8
