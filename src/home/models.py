@@ -29,8 +29,14 @@ class HomePage(RoutablePageMixin, Page):
             {
                 'location': self.full_url,
                 'lastmod': self.latest_revision_created_at,
-                'changefreq': 'yearly',
+                'changefreq': 'monthly',
                 'priority': 1
+            },
+            {
+                'location': self.full_url + '/aboutme/',
+                'lastmod': self.latest_revision_created_at,
+                'changefreq': 'monthly',
+                'priority': 0.8
             }
         ]
 
