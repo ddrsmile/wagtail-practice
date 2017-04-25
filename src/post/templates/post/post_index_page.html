@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% load static wagtailcore_tags wagtailimages_tags %}
 
+{% block title_suffix %} - {{ self.title }}{% endblock %}
+{% block descript_block %}"{{ self.search_description }}"{% endblock %}
+
 {% block content %}
 <style>
     .post-info-wrapper>*:not(hr) {
