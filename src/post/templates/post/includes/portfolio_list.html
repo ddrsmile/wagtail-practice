@@ -29,7 +29,14 @@
                     {% endfor %}
                 </ul>
                 </span>
+                <hr class="post_meta_hr" />
             </div>
+        </div>
+        <div class="post-feed-img-wrapper">
+            {% if post.feed_image %}
+                {% image post.feed_image width-460 as img %}
+                <img class="media-feed-image" src="{{ img.url }}" />
+            {% endif %}
         </div>
     </div>
 </article>
