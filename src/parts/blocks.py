@@ -91,7 +91,6 @@ class MarkDownBlock(TextBlock):
         return forms.CharField(**field_kwargs)
     
     def render_basic(self, value, context=None):
-        extras = ["code-friendly", "fenced-code-blocks"]
         extensions = ["markdown.extensions.extra", "codehilite"]
         marked_content = markdown(value, extensions=extensions)
         return mark_safe(marked_content)
