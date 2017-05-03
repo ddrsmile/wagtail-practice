@@ -20,7 +20,7 @@ from wagtail.wagtaildocs.blocks import DocumentChooserBlock
 from pygments import highlight
 from pygments.formatters import get_formatter_by_name
 from pygments.lexers import get_lexer_by_name
-from markdown2 import markdown
+from markdown import markdown
 # customization
 from parts.widgets import MarkDownWidget, CodeTextWidget
 
@@ -92,7 +92,8 @@ class MarkDownBlock(TextBlock):
     
     def render_basic(self, value, context=None):
         extras = ["code-friendly", "fenced-code-blocks"]
-        marked_content = markdown(value, extras=extras)
+        extensions = ["markdown.extensions.extra", "codehilite"]
+        marked_content = markdown(value, extensions=extensions)
         return mark_safe(marked_content)
 
     class Meta:
