@@ -2,8 +2,6 @@ from __future__ import absolute_import, unicode_literals
 # django
 from django import forms
 from django.utils.safestring import mark_safe
-from django.contrib.staticfiles.templatetags.staticfiles import static
-from django.forms import Media, widgets
 from django.utils.functional import cached_property
 # wagtail
 from wagtail.wagtailcore.blocks import (TextBlock, 

@@ -10,13 +10,18 @@ class CodeTextWidget(WidgetWithScript, widgets.Textarea):
         # default mode is set to python
 
         jsinit = """
+            var code_value_id = "{id!s}"
+            var mode_value_id = code_value_id.replace("code", "language");
+            var code = document.getElementById(code_value_id);
+            var mode = document.getElementById(mode_value_id);
+
             if (window.CodeMirrorInstances == null) {{
                 window.CodeMirrorInstances = {{}};
             }}
             cm = CodeMirror.fromTextArea(
-                document.getElementById("{id!s}"),
+                code,
                 {{
-                    mode: "python",
+                    mode: mode.value,
                     theme: "solarized light",
                     lineNumbers: true,
                     styleActiveLine: true,
@@ -29,8 +34,7 @@ class CodeTextWidget(WidgetWithScript, widgets.Textarea):
                     }}
                 }}
             )
-            
-            window.CodeMirrorInstances["{id!s}"] = cm;
+            window.CodeMirrorInstances[code_value_id] = cm;
         """
         return jsinit.format(id=id_)
     
