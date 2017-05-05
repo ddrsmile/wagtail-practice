@@ -107,7 +107,7 @@ class PostPage(Page):
             {
                 'location': self.full_url,
                 'lastmod': self.latest_revision_created_at,
-                'changefreq': 'never',
+                'changefreq': 'monthly',
                 'priority': 0.5
             }
         ]
