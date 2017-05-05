@@ -1,5 +1,5 @@
 .codehilite pre .hll { background-color: #ffffcc }
-.codehilite pre  { background: #f6f8fa; }
+.codehilite pre  { background: #f6f8fa; font-family: Monaco, Menlo, "Ubuntu Mono", Consolas, source-code-pro, monospace !important;}
 .codehilite pre .c { color: #999988; font-style: italic } /* Comment */
 .codehilite pre .err { color: #a61717; background-color: #e3d2d2 } /* Error */
 .codehilite pre .k { color: #000000; font-weight: bold } /* Keyword */
