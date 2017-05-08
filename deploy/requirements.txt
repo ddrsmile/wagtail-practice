@@ -15,7 +15,7 @@ olefile==0.44
 packaging==16.8
 Pillow==4.1.1
 Pygments==2.2.0
-PyMySQL==0.7.10
+PyMySQL==0.7.11
 pyparsing==2.2.0
 pytz==2017.2
 requests==2.13.0
