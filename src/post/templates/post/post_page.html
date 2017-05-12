@@ -63,39 +63,84 @@
 </div>
 
 <style text="text/css">
-.body-content {
-    background: #FFFFFF;
-    padding: 1rem 1.25rem;
-    border: 0.1rem solid #F5F5F5;
-    border-radius: 0.375rem;
-    margin-bottom: 2.5rem;
-    box-shadow: 12px 15px 20px 0px rgba(46,61,73,0.15);
-}
-.body-content h1,
-.body-content h2,
-.body-content h3 {
-    font-family: 'Open Sans', sans-serif;
-    color: #000;
-}
-@media only screen
-and (max-width: 1024px) {
-    .page-header,
-    .tag-list ul {
-        padding: 0 15px;
-    }
     .body-content {
-        padding: 15px;
-        border-radius: 0;
-        box-shadow: none;
+        background: #FFFFFF;
+        padding: 1rem 1.25rem;
+        margin-bottom: 2.5rem;
     }
-}
+    .body-content h1,
+    .body-content h2,
+    .body-content h3 {
+        font-family: 'Open Sans', sans-serif;
+        color: #000;
+    }
+    .prev-next-navi {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 2.5rem;
+    }
+    .prev-next-navi > .prev-next-navi-item {
+        height: 3.6rem;
+        line-height: 3.6rem;
+        width: 40%;
+        text-align: center;
+    }
+    .prev-next-navi > .prev-next-navi-item > a > p {
+        font-size: 1.2rem;
+        margin: 0;
+    }
+    .disqus-box {
+        padding: 0 0.5rem;
+        margin-bottom: 2rem;
+    }
+    @media only screen
+    and (max-width: 1024px) {
+        .page-header,
+        .tag-list ul {
+            padding: 0 15px;
+        }
+        .body-content,
+        .prev-next-navi {
+            padding: 15px;
+        }
+    }
 </style>
 <link rel="stylesheet" href="{% static 'css/github.css' %}">
-<div class="body-content">
+<div class="body-content shadow-box">
     {% if self.body %}
         {% include "post/includes/stream_fields.html" with content=self.body %}
     {% endif %}
 </div>
+<div class="prev-next-navi">
+    <div class="prev-next-navi-item shadow-box">
+        <a href="{{ self.prev_post.url }}"><p>PREVIOUS</p></a>
+    </div>
+    <div class="prev-next-navi-item shadow-box">
+        <a href="{{ self.next_post.url }}"><p>NEXT</p></a>
+    </div>
+</div>
+<div class="disqus-box shadow-box">
+    <div id="disqus_thread"></div>
+</div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://joeyliu.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 {% endblock %}
 
 {% block extra_js %}
@@ -111,6 +156,21 @@ MathJax.Hub.Config({
     messageStyle: "none",
     "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
 });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $.each($('.prev-next-navi-item'), function() {
+            var post_item = this;
+            $(post_item).find('a').hover(
+            function () {
+                $(post_item).addClass('shadow-box-hover');
+            },
+            function () {
+                $(post_item).removeClass('shadow-box-hover');
+            }
+        );
+        });
+    });
 </script>
 <script async type="text/javascript" src="{% static 'js/MathJax/MathJax.js' %}?config=TeX-AMS-MML_HTMLorMML"></script>
 {% endblock %}

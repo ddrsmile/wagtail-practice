@@ -45,21 +45,7 @@ h1, h2, h3 {
 .logo-name h1 {
     font-size: 2.5rem;
 }
-/*
-img#bkgd {
-    min-height: 100%;
-    min-width: 1024px;
-    width: 100%;
-    height:auto;
-    position:fixed;
-    top:0;
-    left:0;
-    z-index: -1;
-}
 
-old color: #CD9B1D
-
-*/
 /* NAVI-TABLE */
 .navbar-table {
     width: 100%;
@@ -131,6 +117,17 @@ a, a:hover, a:active, a:visited {
 #navbar>ul.nav.navbar-nav>li>a {
     font-size: 1rem;
 }
+
+/* WIDGETS */
+.shadow-box {
+    border: 0.01rem solid rgba(46,61,73,0.15);
+    border-radius: 0.375rem;
+    box-shadow: 12px 15px 20px 0px rgba(46,61,73,0.15);
+    transition: all 0.3s ease;
+}
+.shadow-box-hover {
+    box-shadow:2px 4px 8px 0px rgba(46,61,73,0.2) !important;
+}
 /* CUSTOMIZE RESPONSIVE */
 @media only screen 
   and (min-width: 320px)
@@ -154,4 +151,15 @@ a, a:hover, a:active, a:visited {
         left: 50%;
         margin-left: -512px;
     }
+}
+@media only screen
+  and (max-width: 1024px) {
+    .shadow-box {
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .shadow-box-hover {
+        box-shadow: none;
+    }
+
 }

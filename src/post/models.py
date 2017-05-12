@@ -102,6 +102,16 @@ class PostPage(Page):
         # Find closest ancestor which is a post index
         return self.get_ancestors().type(PostIndexPage).last()
 
+    @property
+    def prev_post(self):
+        post = self.get_prev_sibling() or self.get_siblings().last()
+        return None if post.id == self.id else post
+
+    @property
+    def next_post(self):
+        post = self.get_next_sibling() or self.get_siblings().first()
+        return None if post.id == self.id else post
+
     def get_sitemap_urls(self):
         return [
             {
