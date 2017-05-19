@@ -75,13 +75,12 @@
         border-radius: 0.375rem;
         box-shadow:2px 4px 8px 0px rgba(46,61,73,0.2) !important;
     }
-    .prev-next-navi > .prev-next-navi-item > a > p {
+    .prev-next-navi > .prev-next-navi-item p {
         font-size: 1.17rem;
         margin: 0;
     }
-    .prev-next-navi > .prev-next-navi-item.disable-item {
-        color: #CCC;
-        font-size: 1.17rem;
+    .prev-next-navi > .prev-next-navi-item.disable-item p {
+        color: #CCC !important;
     }
     @media only screen 
     and (max-width: 1024px) {
@@ -98,24 +97,21 @@
 {% endblock post_index_like_content %}
 <section class="pagination-box row">
     <div class="prev-next-navi col-sm-6 col-sm-offset-3">
-        {% if posts.has_previous %}
-        <div class="prev-next-navi-item">
-            <a href="?page={{ posts.previous_page_number }}"><p>PREVIOUS</p></a>
+        <div class="prev-next-navi-item {{ posts.has_previous|yesno:',disable-item' }}">
+            {% if posts.has_previous %}
+                <a href="?page={{ posts.previous_page_number }}"><p>PREVIOUS</p></a>
+            {% else %}
+                <p>PREVIOUS</p>
+            {% endif %}
         </div>
-        {% else %}
-        <div class="prev-next-navi-item disable-item">
-            <p class="disable-item">PREVIOUS</p>
+
+        <div class="prev-next-navi-item {{ posts.has_next|yesno:',disable-item' }}">
+            {% if posts.has_next %}
+                <a href="?page={{ posts.next_page_number }}"><p>NEXT</p></a>
+            {% else %}
+                <p>NEXT</p>
+            {% endif %}
         </div>
-        {% endif %}
-        {% if posts.has_next %}
-        <div class="prev-next-navi-item">
-            <a href="?page={{ posts.next_page_number }}"><p>NEXT</p></a>
-        </div>
-        {% else %}
-        <div class="prev-next-navi-item disable-item">
-            <p class="disable-item">NEXT</p>
-        </div>
-        {% endif %}
     </div>
 </section>
 {% endblock %}
