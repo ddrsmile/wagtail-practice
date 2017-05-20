@@ -3,10 +3,66 @@
 
 {% block title_suffix %} - ABOUTME{% endblock %}
 
-{% block descript_block %}This aboutme page introduces who I am; what's my experiences and what's my abilities!{% endblock %}
+{% block descript_block %}I am Nan-Tsou Liu. And my preferred name is Joey. This page is talking about me.{% endblock %}
 
 {% block content %}
-<div class="main-content-box">
-    <h1>ABOUTME PAGE</h1>
-</div>
+<style type="text/css">
+    article {
+        text-align:center;
+        margin: 3rem 0;
+    }
+    .social-media-box {
+        width: 100%;
+        margin: 3rem 0;
+        display: -webkit-flex;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .social-media-box ul {
+        list-style: none;
+        padding: 0;
+    }
+    .social-media-box ul li {
+        display: inline-flex;
+        align-items:center;
+        padding: 0;
+    }
+    .social-media-box ul li {
+        margin: 0 20px;
+    }
+    @media only screen
+    and (max-width: 1024px) {
+        .main-content-box {
+            padding: 0 15px;
+        }
+    }
+</style>
+<section class="main-content-box">
+    <h1 class="hidden-xs" align="center">Joey LIU | NANTSOU</h1>
+    <article>
+        <p>
+            My name is Nan-Tsou Liu.<br/>
+            I usually use Joey as my preferred name.<br/>
+            And I come from Taiwan.<br/>
+            <br/>
+            I am a Python software engineer based at Rakuten Japan.<br/>
+            My professional is building website applications and systems.<br/>
+            <br/>
+            I am right now studying AI, ML and Data Analysis.<br/>
+            I am working hard on making myself to cut in these industries.<br/>
+            <br/>
+            Finally, Thank you very much for visiting my personal website.<br/>
+            I share my experiences of building websites, AI, ML and Data Analysis here<br/>
+            Hope you can get something from my experiences and share your thought
+        </p>
+    </article>
+    <div class="social-media-box">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+        <ul class="clearfix">
+            <li><a href="https://github.com/ddrsmile"><i class="fa fa-github fa-5x" aria-hidden="true"></i></a></li>
+            <li><a href="https://linkedin.com/in/ntliu"><i class="fa fa-linkedin-square fa-5x" aria-hidden="true"></i></a></li>
+        </ul>
+    </div>
+</section>
 {% endblock %}
