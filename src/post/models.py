@@ -35,7 +35,9 @@ class PostIndexPage(Page):
         
         page = request.GET.get('page')
         posts = self.get_paginated_posts(page, posts)
+        page_range = self.designate_pages_range(posts, posts.paginator)
         context['posts'] = posts
+        context['page_range'] = page_range
 
         return context
 
@@ -58,6 +60,15 @@ class PostIndexPage(Page):
         except EmptyPage:
             posts = paginator.page(paginator.num_pages)
         return posts
+
+    def designate_pages_range(self, page, paginator):
+        start_index = max(1, page.number - 2)
+        end_index = min(start_index + 4, paginator.num_pages)
+
+        start_index = min(start_index, max(end_index - 4, 1))
+
+        page_range = [i for i in range(start_index, end_index + 1)]
+        return {'page_range': page_range}
 
     def get_sitemap_urls(self):
         return [
