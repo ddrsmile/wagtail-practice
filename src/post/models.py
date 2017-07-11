@@ -37,8 +37,7 @@ class PostIndexPage(Page):
         posts = self.get_paginated_posts(page, posts)
         page_range = self.designate_pages_range(posts, posts.paginator)
         context['posts'] = posts
-        context['page_range'] = page_range
-
+        context.update(page_range)
         return context
 
     def get_template(self, request, *args, **kwargs):
