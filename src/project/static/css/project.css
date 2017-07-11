@@ -7,14 +7,6 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
 }
 
-@font-face {
-    font-family: 'Trashhand';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Trashhand'), url(../fonts/trashhand-webfont.woff2) format('woff2');
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
-}
-
 .flex-align {
     display:inline-flex;
     flex-direction:row;
@@ -144,28 +136,20 @@ a, a:hover, a:active, a:visited {
     .navbar-brand {
         font-size: 1.5rem;
     }
-}
-@media only screen 
-  and (min-width: 768px)
-  and (max-width: 1024px)  {
-    html {
-        font-size: 18px;
-    }
-}
-@media screen and (max-width: 1024px) {
-    img#bkgd {
-        left: 50%;
-        margin-left: -512px;
+    .shadow-box {
+        box-shadow:2px 4px 8px 0px rgba(46,61,73,0.2);
     }
 }
 @media only screen
-  and (max-width: 1024px) {
+  and (min-width: 569px)
+  and (max-width: 767px) {
+    html {
+        font-size: 18px;
+    }
+    .navbar-brand {
+        font-size: 1.5rem;
+    }
     .shadow-box {
-        border-radius: 0;
-        box-shadow: none;
+        box-shadow:2px 4px 8px 0px rgba(46,61,73,0.2);
     }
-    .shadow-box-hover {
-        box-shadow: none;
-    }
-
 }

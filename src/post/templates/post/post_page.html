@@ -111,16 +111,7 @@
         {% include "post/includes/stream_fields.html" with content=self.body %}
     {% endif %}
 </div>
-{% if self.prev_post or self.next_post %}
-<div class="prev-next-navi">
-    <div class="prev-next-navi-item shadow-box">
-        <a href="{{ self.prev_post.url }}"><p>PREVIOUS</p></a>
-    </div>
-    <div class="prev-next-navi-item shadow-box">
-        <a href="{{ self.next_post.url }}"><p>NEXT</p></a>
-    </div>
-</div>
-{% endif %}
+
 <div class="disqus-box shadow-box">
     <div id="disqus_thread"></div>
 </div>
