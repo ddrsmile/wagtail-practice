@@ -34,7 +34,7 @@ DEFAULT_FILE_STORAGE = 'project.settings.custom_path.MediaStorage'
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-BASE_URL = 'https://joeyliu.me'
+BASE_URL = 'https://joeyliu.net'
 
 try:
     from .local import *
