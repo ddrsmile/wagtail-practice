@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: /admin/
 
-Sitemap: https://joeyliu.me/sitemap.xml
+Sitemap: https://joeyliu.net/sitemap.xml
