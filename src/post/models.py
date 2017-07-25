@@ -12,6 +12,8 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailsearch import index
+from wagtail.api import APIField
+
 # customization
 from parts.blocks import PostStreamBlock
 from parts.fields import RelatedLink
@@ -102,6 +104,14 @@ class PostPage(Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+
+    api_fields = [
+        APIField('title'),
+        APIField('date'),
+        APIField('search_description'),
+        APIField('feed_image'),
+        APIField('tags')
+    ]
 
     search_fields = Page.search_fields + [
         index.SearchField('body'),
