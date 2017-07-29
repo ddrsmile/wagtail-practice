@@ -10,6 +10,8 @@ from wagtail.wagtailcore import urls as wagtail_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
 from wagtail.contrib.wagtailsitemaps.views import sitemap
 
+from .api import api_router
+
 urlpatterns = [
     url(r'^django-admin/', include(admin.site.urls)),
 
@@ -18,6 +20,10 @@ urlpatterns = [
 
     url(r'^search/$', search_views.search, name='search'),
     url('^sitemap\.xml$', sitemap),
+
+    url(r'^api/v2/', api_router.urls),
+
+
     url(r'', include(wagtail_urls)),
 ]
 
