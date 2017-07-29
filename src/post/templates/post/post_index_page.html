@@ -55,8 +55,26 @@
     .post_tag_list ul li a:hover {
         opacity: 0.75;
     }
+    .btn-tag {
+        display: inline-block;
+        color: #FFFFFF;
+        background-color: #3D3D3D;
+        border-radius: 3px;
+        padding: 0 0.2rem;
+        font-size: 0.6rem;
+        cursor: pointer;
+    }
+    .btn-tag:hover {
+        opacity: 0.75;
+    }
+    .post-feed-img-wrapper img {
+        width: 100%;
+    }
     article:not(:last-child) {
         margin-bottom: 2.5rem;
+    }
+    #template {
+        display: none;
     }
     .pagination-box {
         display: block;
@@ -79,7 +97,6 @@
     .pagination>li:not(:first-child):not(:last-child) {
         margin: 0 0.2rem;
     }
-    .pagination>li>a,
     .pagination>li>span {
         width: 1.8rem;
         height: 1.8rem;
@@ -95,21 +112,18 @@
     .pagination>li>span.page_link {
         cursor:pointer;
     }
-    .pagination>li>a:hover,
     .pagination>li>span:hover {
         color: #3D3D3D;
         border-color: rgba(61, 61, 61, 0.2);
         background-color: rgba(61, 61, 61, 0.1);
         box-shadow:2px 4px 8px 0px rgba(46,61,73,0.2);
     }
-    .pagination>li.disabled>a,
     .pagination>li.disabled>span {
         color: #8A8A8A;
         background-color: rgba(61, 61, 61, 0.1);
         border-color: rgba(61, 61, 61, 0.2);
         box-shadow:2px 4px 8px 0px rgba(46,61,73,0.2);
     }
-    .pagination>li.disabled>a:hover,
     .pagination>li.disabled>span:hover {
         color: #8A8A8A;
         background-color: rgba(61, 61, 61, 0.1);
@@ -133,83 +147,173 @@
             padding: 0 15px;
         }
     }
-    @media only screen
-      and (min-width: 320px)
-      and (max-width: 568px) {
-        html {
-            font-size: 16px;
-        }
-        .navbar-brand {
-            font-size: 1.5rem;
-        }
-        .shadow-box {
-            box-shadow:2px 4px 8px 0px rgba(46,61,73,0.2);
-        }
-    }
-    @media only screen
-      and (min-width: 569px)
-      and (max-width: 767px) {
-        html {
-            font-size: 18px;
-        }
-        .navbar-brand {
-            font-size: 1.5rem;
-        }
-        .shadow-box {
-            box-shadow:2px 4px 8px 0px rgba(46,61,73,0.2);
-        }
-    }
     {% block extra_inpage_css %}{% endblock extra_inpage_css %}
 </style>
-{% block post_index_like_content %}
+
 <section class="main-content-box">
-    <h1>Please add blog index like template!!!</h1>
 </section>
-{% endblock post_index_like_content %}
 
 <section class="pagination-box">
-     <div class="pagination-wrap col-sm-6 col-sm-offset-3">
-         <ul class="pagination">
-             {% if posts.has_previous %}
-             <li><a href="?page={{ posts.previous_page_number }}"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
-             {% else %}
-             <li class="disabled"><span><i class="fa fa-angle-double-left" aria-hidden="true"></i></span></li>
-             {% endif %}
-
-             {% for i in page_range %}
-                 {% if posts.number == i %}
-                     <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-                 {% else %}
-                     <li><a href="?page={{ i }}">{{ i }}</a></li>
-                 {% endif %}
-             {% endfor %}
-
-             {% if posts.has_next %}
-             <li><a href="?page={{ posts.next_page_number }}"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
-             {% else %}
-             <li class="disabled"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span></li>
-             {% endif %}
-         </ul>
-     </div>
+    <div class="pagination-wrap col-sm-6 col-sm-offset-3">
+        <ul class="pagination"></ul>
+    </div>
  </section>
+
+<article id="template" class="col-sm-6 col-sm-offset-3">
+    <div class="post-item shadow-box clearfix">
+        <div class="post-info-wrapper">
+            <p class="post-meta">
+                <span class="meta-text"></span>
+            </p>
+            <h3 class="post-title"><a></a></h3>
+            <div class="post_description">
+                <p class="meta-text"></p>
+            </div>
+            <div class="post_meta clearfix">
+                <div class="post_tag_list">
+                    <hr class="post_meta_hr" />
+                    <ul></ul>
+                </div>
+            </div>
+        </div>
+        {# if post.feed_image #}
+        <div class="post-feed-img-wrapper">
+            <hr class="post_meta_hr" />
+            {# image post.feed_image width-460 as img #}
+            <img class="media-feed-image" src="{{ img.url }}" />
+        </div>
+        {# endif #}
+    </div>
+</article>
 
 <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
 {% endblock %}
 
 {% block extra_js %}
 <script type="text/javascript">
-    $(document).ready(function() {
-        $.each($('.post-item'), function() {
-            var post_item = this;
-            $(post_item).find('h3.post-title a').hover(
+
+    function build_post_item(item) {
+        var post_item = $('#template').clone().removeAttr("id");
+
+        post_item.find(".post-info-wrapper .post-meta .meta-text").text(item['date']);
+        post_item.find("h3.post-title a").attr("href", item['meta']['html_url']).text(item['title']);
+
+        var description = item['meta']['search_description'];
+        if (description) {
+            post_item.find(".post_description .meta-text").text(description);
+        } else {
+            post_item.find(".post_description").remove();
+        }
+
+        var tags = item["tags"];
+        if (tags.length > 0) {
+            $.each(tags, function(i, tag) {
+                var li = $("<li></li>").addClass("flex-align").append(
+                    $("<span></span>").addClass("btn-tag").text(tag)
+                );
+                li.find("span").on('click', function() {
+                    var tag = $(this).text();
+                    render_page(undefined, tag=tag);
+                });
+                post_item.find(".post_tag_list ul").append(li);
+            });
+        } else {
+            post_item.find(".post_tag_list").remove();
+        }
+
+        var feed_image_thumbnail = item["feed_image_thumbnail"];
+        if (feed_image_thumbnail) {
+            post_item.find(".post-feed-img-wrapper img").attr("src", feed_image_thumbnail["url"]);
+        } else {
+            post_item.find(".post-feed-img-wrapper").remove();
+        }
+
+        post_item.find("h3.post-title a").hover(
             function () {
-                $(post_item).addClass('shadow-box-hover');
+                post_item.find(".post-item").addClass("shadow-box-hover");
             },
             function () {
-                $(post_item).removeClass('shadow-box-hover');
+                post_item.find(".post-item").removeClass("shadow-box-hover");
             }
         );
+        return post_item;
+    }
+
+    function build_pagination_item(page_num, prev_or_next) {
+        var li = $("<li><span class='page_link'></span></li>");
+
+        if (page_num === null) {
+            li.addClass("disabled");
+        } else {
+            li.find("span").on("click", function() {
+                var tag = $("section.main-content-box").attr("tag");
+                render_page(page_num, tag);
+            });
+        }
+
+        if (prev_or_next === "prev") {
+            li.find("span").append("<i class='fa fa-angle-double-left' aria-hidden='true'></i>");
+        } else if (prev_or_next === "next") {
+            li.find("span").append("<i class='fa fa-angle-double-right' aria-hidden='true'></i>");
+        } else {
+            li.find("span").text(page_num);
+        }
+
+        return li;
+    }
+
+    function build_pagination(prev, next, current_page, page_range) {
+        var pagination = $("ul.pagination");
+
+        pagination.append(build_pagination_item(prev, "prev"));
+
+        $.each(page_range, function(index, num) {
+            var li = build_pagination_item(num);
+            if (num === current_page) {
+                li.addClass("active");
+                li.find("span").unbind("click").removeClass("page_link");
+            }
+            pagination.append(li);
         });
+
+        pagination.append(build_pagination_item(next, "next"));
+    }
+
+    function render_page(page, tag) {
+        var main_box = $("section.main-content-box");
+        var pagination = $("ul.pagination");
+        main_box.empty();
+        pagination.empty();
+        var url = "/api/v2/posts/?child_of=" + {{ self.id }};
+
+        if (tag !== undefined) {
+            url += "&tags=" + tag;
+            main_box.attr("tag", tag);
+        }
+        if (page !== undefined) {
+            url += "&page=" + page;
+        }
+
+        $.ajax({
+            type: "get",
+            url: url,
+            success: function(data) {
+
+                $.each(data["items"], function(index, item) {
+                    var post_item = build_post_item(item);
+                    main_box.append(post_item);
+                });
+
+                build_pagination(data["previous_page_num"],
+                                 data["next_page_num"],
+                                 data["current_page"],
+                                 data["page_range"]);
+            },
+            error: function() {}
+        });
+    }
+    $(document).ready(function() {
+        render_page();
     });
 </script>
 {% endblock %}

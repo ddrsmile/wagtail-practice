@@ -13,6 +13,7 @@ from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailsearch import index
 from wagtail.api import APIField
+from wagtail.wagtailimages.api.fields import ImageRenditionField
 
 # customization
 from parts.blocks import PostStreamBlock
@@ -26,50 +27,12 @@ from taggit.models import TaggedItemBase
 class PostIndexPage(Page):
 
     subpage_types = ['post.PostPage']
-
-    def get_context(self, request, *args, **kwargs):
-        context = super(PostIndexPage, self).get_context(request)
-        posts = self.posts
-
-        tag = request.GET.get('tag')
-        if tag:
-            posts = posts.filter(tags__name=tag)
-        
-        page = request.GET.get('page')
-        posts = self.get_paginated_posts(page, posts)
-        page_range = self.designate_pages_range(posts, posts.paginator)
-        context['posts'] = posts
-        context.update(page_range)
-        return context
-
-    def get_template(self, request, *args, **kwargs):
-        default_template = super(PostIndexPage, self).get_template(request)
-        return select_template(['post/{}.html'.format(self.slug), default_template])
     
     @property
     def posts(self):
         posts = PostPage.objects.live().descendant_of(self)
         posts = posts.order_by('-date', 'id')
         return posts
-    
-    def get_paginated_posts(self, page, posts):
-        paginator = Paginator(posts, 6)
-        try:
-            posts =  paginator.page(page)
-        except PageNotAnInteger:
-            posts = paginator.page(1)
-        except EmptyPage:
-            posts = paginator.page(paginator.num_pages)
-        return posts
-
-    def designate_pages_range(self, page, paginator):
-        start_index = max(1, page.number - 2)
-        end_index = min(start_index + 4, paginator.num_pages)
-
-        start_index = min(start_index, max(end_index - 4, 1))
-
-        page_range = [i for i in range(start_index, end_index + 1)]
-        return {'page_range': page_range}
 
     def get_sitemap_urls(self):
         return [
@@ -109,7 +72,7 @@ class PostPage(Page):
         APIField('title'),
         APIField('date'),
         APIField('search_description'),
-        APIField('feed_image'),
+        APIField('feed_image_thumbnail', serializer=ImageRenditionField('width-460', source='feed_image')),
         APIField('tags')
     ]
 
