@@ -284,7 +284,7 @@
         var pagination = $("ul.pagination");
         main_box.empty();
         pagination.empty();
-        var url = "/api/v2/posts/?child_of=" + {{ self.id }};
+        var url = "/api/v2/posts/?&order=-date&child_of=" + {{ self.id }};
 
         if (tag !== undefined) {
             url += "&tags=" + tag;
