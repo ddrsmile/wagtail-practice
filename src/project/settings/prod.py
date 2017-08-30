@@ -11,10 +11,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
 # using s3 as the storage for media files
-import csv
 # settings of aws authentication, bucket name and domain
-AWS_PEM = csv.reader(open('/usr/local/etc/aws_credentials.csv'), delimiter=',')
-AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY = next(AWS_PEM)
+AWS_ACCESS_KEY_ID = data["AWS"]["ID"]
+AWS_SECRET_ACCESS_KEY = data["AWS"]["KEY"]
 
 AWS_HEADERS = {
     'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',

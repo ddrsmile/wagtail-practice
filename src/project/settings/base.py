@@ -1,11 +1,13 @@
 from __future__ import absolute_import, unicode_literals
 import os
-
+import json
 import pymysql
 pymysql.install_as_MySQLdb()
 
-with open('/usr/local/etc/SECRET_KEY') as f:
-    SECRET_KEY = f.read().strip()
+with open('/usr/local/etc/joeyliu.json') as f:
+    data = json.load(f)
+
+SECRET_KEY = data["SECRET_KEY"]
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
@@ -84,11 +86,11 @@ DB_INFO = next(DB_INFO)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': DB_INFO[0],
-        'USER': DB_INFO[1],
-        'PASSWORD': DB_INFO[2],
-        'HOST': DB_INFO[3],
-        'PORT': DB_INFO[4],
+        'NAME': data["DB"]["NAME"],
+        'USER': data["DB"]["USER"],
+        'PASSWORD': data["DB"]["PASSWORD"],
+        'HOST': data["DB"]["HOST"],
+        'PORT': data["DB"]["PORT"],
         'OPTIONS': {
             'sql_mode': 'traditional',
         }
