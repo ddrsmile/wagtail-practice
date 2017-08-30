@@ -79,10 +79,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'project.wsgi.application'
 
-
-import csv
-DB_INFO = csv.reader(open('/usr/local/etc/dbinfo.csv'), delimiter=',')
-DB_INFO = next(DB_INFO)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
