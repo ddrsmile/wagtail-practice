@@ -1,11 +1,11 @@
 #-*- coding: utf-8 -*-
-
 import os
+import random, string
+PUNCTUATION = '`~!@#$%^&*()_-+={}[]|<>?/,.;:'
 
 def gen_key():
-    import random, string
     return "".join([random.SystemRandom() \
-             .choice(string.digits + string.ascii_letters + string.punctuation) for i in range(100)])
+             .choice(string.digits + string.ascii_letters + PUNCTUATION) for i in range(50)])
 
 def gen_file():
     with open('SECRET_KEY', 'w') as f:
