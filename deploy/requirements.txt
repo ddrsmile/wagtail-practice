@@ -3,9 +3,9 @@ beautifulsoup4==4.6.0
 boto==2.48.0
 certifi==2017.7.27.1
 chardet==3.0.4
-Django==1.11.4
+Django==1.11.5
 django-modelcluster==3.1
-django-storages==1.5.1
+django-storages==1.6.5
 django-taggit==0.22.1
 django-treebeard==4.1.2
 djangorestframework==3.6.4
@@ -13,7 +13,7 @@ freeze==1.0.10
 gunicorn==19.7.1
 html5lib==0.999999999
 idna==2.6
-Markdown==2.6.8
+Markdown==2.6.9
 olefile==0.44
 packaging==16.8
 Pillow==4.2.1
