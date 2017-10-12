@@ -66,7 +66,7 @@ class CodeBlock(StructBlock):
             'html',
             linenos=None,
             cssclass='codehilite',
-            style='github',
+            style='xcode',
             noclasses=False,
         )
         render_content = highlight(src, lexer, formatter)
