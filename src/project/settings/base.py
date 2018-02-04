@@ -5,7 +5,7 @@ import pymysql
 pymysql.install_as_MySQLdb()
 
 with open('/usr/local/etc/webapps.json') as f:
-    data = json.load(f)
+    config = json.load(f)
 
 SECRET_KEY = data["SECRET_KEY"]
 
@@ -83,10 +83,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'joeyliu',
-        'USER': data["DB"]["USER"],
-        'PASSWORD': data["DB"]["PASSWORD"],
-        'HOST': data["DB"]["HOST"],
-        'PORT': data["DB"]["PORT"],
+        'USER': config["DB"]["USER"],
+        'PASSWORD': config["DB"]["PASSWORD"],
+        'HOST': config["DB"]["HOST"],
+        'PORT': config["DB"]["PORT"],
         'OPTIONS': {
             'sql_mode': 'traditional',
         }
