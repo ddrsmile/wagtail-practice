@@ -4,7 +4,7 @@ import json
 import pymysql
 pymysql.install_as_MySQLdb()
 
-with open('/usr/local/etc/joeyliu.json') as f:
+with open('/usr/local/etc/webapps.json') as f:
     data = json.load(f)
 
 SECRET_KEY = data["SECRET_KEY"]
@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': data["DB"]["NAME"],
+        'NAME': 'joeyliu',
         'USER': data["DB"]["USER"],
         'PASSWORD': data["DB"]["PASSWORD"],
         'HOST': data["DB"]["HOST"],
