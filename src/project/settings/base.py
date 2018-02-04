@@ -7,7 +7,7 @@ pymysql.install_as_MySQLdb()
 with open('/usr/local/etc/webapps.json') as f:
     config = json.load(f)
 
-SECRET_KEY = data["SECRET_KEY"]
+SECRET_KEY = config["SECRET_KEY"]
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
