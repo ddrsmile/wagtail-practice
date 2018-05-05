@@ -1,9 +1,9 @@
-from __future__ import absolute_import, unicode_literals
 # django
 from django.template.response import TemplateResponse
 # wagtail
-from wagtail.wagtailcore.models import Page
-from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
+from wagtail.core.models import Page
+from wagtail.contrib.routable_page.models import RoutablePageMixin, route
+
 
 class HomePage(RoutablePageMixin, Page):
     subpage_types = ['post.PostIndexPage']
@@ -39,5 +39,6 @@ class HomePage(RoutablePageMixin, Page):
                 'priority': 0.8
             }
         ]
+
 
 HomePage.content_panels = Page.content_panels

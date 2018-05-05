@@ -1,19 +1,19 @@
-from __future__ import absolute_import, unicode_literals
 # django
 from django import forms
 from django.utils.safestring import mark_safe
 from django.utils.functional import cached_property
 # wagtail
-from wagtail.wagtailcore.blocks import (TextBlock, 
-                                        StructBlock, 
-                                        StreamBlock, 
-                                        FieldBlock, 
-                                        CharBlock, 
-                                        RichTextBlock, 
-                                        RawHTMLBlock, 
-                                        ChoiceBlock)
-from wagtail.wagtailimages.blocks import ImageChooserBlock
-from wagtail.wagtaildocs.blocks import DocumentChooserBlock
+from wagtail.core.blocks import (TextBlock,
+                                 StructBlock,
+                                 StreamBlock,
+                                 FieldBlock,
+                                 CharBlock,
+                                 RichTextBlock,
+                                 RawHTMLBlock,
+                                 ChoiceBlock
+                                 )
+from wagtail.images.blocks import ImageChooserBlock
+from wagtail.documents.blocks import DocumentChooserBlock
 # 3rd party
 from pygments import highlight
 from pygments.formatters import get_formatter_by_name
@@ -22,16 +22,18 @@ from markdown import markdown
 # customization
 from parts.widgets import MarkDownWidget, CodeTextWidget
 
+
 LANGUAGES = ( 
     ('cpp', 'C++'),
     ('java', 'Java'),
-    ('python','Python'),
+    ('python', 'Python'),
     ('python3', 'Python 3'),
     ('bash', 'Bash/Shell'),
     ('javascript', 'Javascript'),
     ('css', "CSS"),
     ('html', "HTML"),
 )
+
 
 class CodeChoiceBlock(ChoiceBlock):
     def __init__(self, choices=None, default=None, required=True, help_text=None, **kwargs): 
@@ -42,6 +44,7 @@ class CodeChoiceBlock(ChoiceBlock):
                                               **kwargs)
         self.field.widget.attrs.update({'onchange': 'update_code_mode(this)'})
 
+
 class CodeTextBlock(TextBlock):
     @cached_property
     def field(self):
@@ -50,6 +53,7 @@ class CodeTextBlock(TextBlock):
         }
         field_kwargs.update(self.field_options)
         return forms.CharField(**field_kwargs)
+
 
 class CodeBlock(StructBlock):
     language = CodeChoiceBlock(choices=LANGUAGES, blank=False, null=False, default='python')
@@ -77,7 +81,8 @@ class CodeBlock(StructBlock):
         return mark_safe(render_content)
 
     class Meta:
-        icon="code"
+        icon = "code"
+
 
 class MarkDownBlock(TextBlock):
     @cached_property
@@ -96,6 +101,7 @@ class MarkDownBlock(TextBlock):
     class Meta:
         icon = 'edit'
 
+
 class PullQuoteBlock(StructBlock):
     quote = TextBlock("quote title")
     attribution = CharBlock()
@@ -103,20 +109,24 @@ class PullQuoteBlock(StructBlock):
     class Meta:
         icon = "openquote"
 
+
 class ImageFormatChoiceBlock(FieldBlock):
     field = forms.ChoiceField(choices=(
         ('left', 'Wrap left'), ('right', 'Wrap right'), ('mid', 'Mid width'), ('full', 'Full width'),
     ))
+
 
 class HTMLAlignmentChoiceBlock(FieldBlock):
     field = forms.ChoiceField(choices=(
         ('normal', 'Normal'), ('full', 'Full width'),
     ))
 
+
 class ImageBlock(StructBlock):
     image = ImageChooserBlock()
     caption = RichTextBlock()
     alignment = ImageFormatChoiceBlock()
+
 
 class AlignedHTMLBlock(StructBlock):
     html = RawHTMLBlock()
@@ -124,6 +134,7 @@ class AlignedHTMLBlock(StructBlock):
 
     class Meta:
         icon = "code"
+
 
 class PostStreamBlock(StreamBlock):
     markdown = MarkDownBlock()

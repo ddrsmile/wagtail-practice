@@ -1,6 +1,7 @@
-from django.core.urlresolvers import NoReverseMatch
+from django.urls import NoReverseMatch
 from rest_framework.fields import Field
 from wagtail.api.v2.serializers import PageSerializer
+
 
 class PostPageHtmlUrlField(Field):
     """
@@ -17,6 +18,7 @@ class PostPageHtmlUrlField(Field):
             return page.url
         except NoReverseMatch:
             return None
+
 
 class PostPageSerializer(PageSerializer):
     html_url = PostPageHtmlUrlField(read_only=True)
