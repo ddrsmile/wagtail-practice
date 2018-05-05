@@ -1,4 +1,3 @@
-from __future__ import absolute_import, unicode_literals
 # django
 from django.forms import Media, widgets
 from django.contrib.staticfiles.templatetags.staticfiles import static

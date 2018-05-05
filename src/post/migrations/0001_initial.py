@@ -8,10 +8,10 @@ import django.utils.timezone
 import modelcluster.contrib.taggit
 import modelcluster.fields
 import parts.blocks
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailcore.fields
-import wagtail.wagtaildocs.blocks
-import wagtail.wagtailimages.blocks
+import wagtail.core.blocks
+import wagtail.core.fields
+import wagtail.documents.blocks
+import wagtail.images.blocks
 
 
 class Migration(migrations.Migration):
@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
                 ('date', models.DateField(default=django.utils.timezone.now, verbose_name='post date')),
-                ('body', wagtail.wagtailcore.fields.StreamField((('markdown', parts.blocks.MarkDownBlock()), ('code', wagtail.wagtailcore.blocks.StructBlock((('language', wagtail.wagtailcore.blocks.ChoiceBlock(blank=False, choices=[('cpp', 'C++'), ('java', 'Java'), ('python', 'Python'), ('python3', 'Python 3'), ('bash', 'Bash/Shell'), ('javascript', 'Javascript'), ('css', 'CSS'), ('html', 'HTML')], null=False)), ('code', parts.blocks.CodeTextBlock())))), ('aligned_image', wagtail.wagtailcore.blocks.StructBlock((('image', wagtail.wagtailimages.blocks.ImageChooserBlock()), ('caption', wagtail.wagtailcore.blocks.RichTextBlock()), ('alignment', parts.blocks.ImageFormatChoiceBlock())), icon='image', label='Aligned image')), ('pullquote', wagtail.wagtailcore.blocks.StructBlock((('quote', wagtail.wagtailcore.blocks.TextBlock('quote title')), ('attribution', wagtail.wagtailcore.blocks.CharBlock())))), ('document', wagtail.wagtaildocs.blocks.DocumentChooserBlock(icon='doc-full-inverse'))))),
+                ('body', wagtail.core.fields.StreamField((('markdown', parts.blocks.MarkDownBlock()), ('code', wagtail.core.blocks.StructBlock((('language', wagtail.core.blocks.ChoiceBlock(blank=False, choices=[('cpp', 'C++'), ('java', 'Java'), ('python', 'Python'), ('python3', 'Python 3'), ('bash', 'Bash/Shell'), ('javascript', 'Javascript'), ('css', 'CSS'), ('html', 'HTML')], null=False)), ('code', parts.blocks.CodeTextBlock())))), ('aligned_image', wagtail.core.blocks.StructBlock((('image', wagtail.images.blocks.ImageChooserBlock()), ('caption', wagtail.core.blocks.RichTextBlock()), ('alignment', parts.blocks.ImageFormatChoiceBlock())), icon='image', label='Aligned image')), ('pullquote', wagtail.core.blocks.StructBlock((('quote', wagtail.core.blocks.TextBlock('quote title')), ('attribution', wagtail.core.blocks.CharBlock())))), ('document', wagtail.documents.blocks.DocumentChooserBlock(icon='doc-full-inverse'))))),
                 ('feed_image', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='wagtailimages.Image')),
             ],
             options={

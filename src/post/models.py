@@ -1,4 +1,3 @@
-from __future__ import absolute_import, unicode_literals
 # django
 from django.db import models
 from django.utils import timezone
@@ -6,14 +5,14 @@ from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template.loader import select_template
 # wagtail
-#from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from wagtail.wagtailcore.models import Page, Orderable
-from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailsearch import index
+#from wagtail.contrib.routable_page.models import RoutablePageMixin, route
+from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel
+from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.core.models import Page, Orderable
+from wagtail.core.fields import StreamField
+from wagtail.search import index
 from wagtail.api import APIField
-from wagtail.wagtailimages.api.fields import ImageRenditionField
+from wagtail.images.api.fields import ImageRenditionField
 
 # customization
 from parts.blocks import PostStreamBlock

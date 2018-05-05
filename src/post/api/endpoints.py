@@ -4,6 +4,7 @@ from post.api.serializers import PostPageSerializer
 from post.api.pagination import PostPagePageNumberPagination
 from post.models import PostPage
 
+
 class PostPagesAPIEndPoint(PagesAPIEndpoint):
     pagination_class = PostPagePageNumberPagination
     base_serializer_class = PostPageSerializer
