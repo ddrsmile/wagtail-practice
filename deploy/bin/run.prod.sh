@@ -1,14 +1,14 @@
 #!/bin/bash
 
-NAME=joeyliu
-ROOT=/Users/Joey/webapps/${NAME}
+DEPLOYDIR=$( dirname "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )")
+ROOT=$( dirname $DEPLOYDIR)
+NAME=${ROOT##*/}
 DJANGODIR=${ROOT}/src
-DEPLOYDIR=${ROOT}/deploy
-SOCKFILE=${DEPLOYDIR}/run/gunicorn_${NAME}.sock
-USER=Joey
-GROUP=staff
+SOCKFILE=${DEPLOYDIR}/run/${NAME}.sock
+USER=`id -un`
+GROUP=`id -gn`
 NUM_WORKERS=3
-DJANGO_SETTINGS_MODULE=project.settings.dev
+DJANGO_SETTINGS_MODULE=project.settings.prod
 DJANGO_WSGI_MODULE=project.wsgi
 
 
